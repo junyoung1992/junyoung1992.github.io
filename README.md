@@ -11,5 +11,6 @@ Sejong University, Seoul, Republic of Korea, 2012.03.02 ~ 2019.02.22 </p>
 ## Publications
 
 ## Conference Presentations
+1. 김준영, 한치원, 기민관, 박기호, "엣지 디바이스에서의 효율적인 딥러닝 응용 수행을 위한 성능 분석." 한국정보과학회 학술발표논문집 (2018): 1713-1715. [(Link)](http://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE07614068&language=ko_KR)
 
 ## Honors and Awards
