@@ -1,6 +1,6 @@
 ## Kim Junyoung
-Department of Computer Science and Engineering, Sejong University<br />
-System Design Lab, Sejong University
+<p> Department of Computer Science and Engineering, Sejong University<br />
+System Design Lab, Sejong University </p>
 
 ## Education
 <p> Master of Science in Computer Engineering (in progress)<br />
