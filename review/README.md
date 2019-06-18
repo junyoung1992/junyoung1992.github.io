@@ -3,11 +3,11 @@
 
 ## Reviews
 1. 2019.06.05
-    * Han, Song, Huizi Mao, and William J. Dally. **"Deep compression: Compressing deep neural networks with pruning, trained quantization and huffman coding."** *arXiv preprint arXiv:1510.00149* (2015). [[Link]](https://arxiv.org/abs/1510.00149) [[Review]](https://github.com/junyoung1992/junyoung1992.github.io/raw/master/review/slide/Review_190605.pdf)
+    * Han, Song, Huizi Mao, and William J. Dally. **"Deep compression: Compressing deep neural networks with pruning, trained quantization and huffman coding."** *arXiv preprint arXiv:1510.00149* (2015). [[Link]](https://arxiv.org/abs/1510.00149) [[Review]]()
         * Abstract
         
 1. 2019.05.15
-    * **CNN Models Review** [[Review]](https://github.com/junyoung1992/junyoung1992.github.io/raw/master/review/slide/Review_190515.pdf)
+    * **CNN Models Review** [[Review]]()
         * Abstract
         
         * References
@@ -22,14 +22,14 @@
             1. Xie, Saining, et al. **"Aggregated Residual Transformations for Deep Neural Networks."** *Proceedings of the IEEE conference on computer vision and pattern recognition.* 2017. [[Link]](http://openaccess.thecvf.com/content_cvpr_2017/html/Xie_Aggregated_Residual_Transformations_CVPR_2017_paper.html)
             
 1. 2019.04.03
-    * Ko, Jong Hwan, et al. **"Edge-host partitioning of deep neural networks with feature space encoding for resource-constrained internet-of-things platforms."** 2018 15th IEEE International Conference on Advanced Video and Signal Based Surveillance (AVSS). IEEE, 2018. [[Link]](https://ieeexplore.ieee.org/abstract/document/8639121) [[Review]](https://github.com/junyoung1992/junyoung1992.github.io/raw/master/review/slide/Review_190403.pdf)
+    * Ko, Jong Hwan, et al. **"Edge-host partitioning of deep neural networks with feature space encoding for resource-constrained internet-of-things platforms."** 2018 15th IEEE International Conference on Advanced Video and Signal Based Surveillance (AVSS). IEEE, 2018. [[Link]](https://ieeexplore.ieee.org/abstract/document/8639121) [[Review]]()
         * Abstract
         
 1. 2019.03.20
-    * De Coninck, Elias, et al. **"Distributed Neural Networks for Internet of Things: The Big-Little Approach."** *International Internet of Things Summit.* Springer, Cham, 2015. [[Link]](https://link.springer.com/chapter/10.1007/978-3-319-47075-7_52) [[Review]](https://github.com/junyoung1992/junyoung1992.github.io/raw/master/review/slide/Review_190320_1.pdf)
+    * De Coninck, Elias, et al. **"Distributed Neural Networks for Internet of Things: The Big-Little Approach."** *International Internet of Things Summit.* Springer, Cham, 2015. [[Link]](https://link.springer.com/chapter/10.1007/978-3-319-47075-7_52) [[Review]]()
         * Abstract
         
-    * Chae, Dongju, et al. **"DynaMix: Dynamic Mobile Device Integration for Efficient Cross-device Resource Sharing."** *2018 {USENIX} Annual Technical Conference ({USENIX}{ATC} 18).* 2018. [[Link]](https://www.usenix.org/conference/atc18/presentation/chae) [[Review]](https://github.com/junyoung1992/junyoung1992.github.io/raw/master/review/slide/Review_190320_2.pdf)
+    * Chae, Dongju, et al. **"DynaMix: Dynamic Mobile Device Integration for Efficient Cross-device Resource Sharing."** *2018 {USENIX} Annual Technical Conference ({USENIX}{ATC} 18).* 2018. [[Link]](https://www.usenix.org/conference/atc18/presentation/chae) [[Review]]()
         * Abstract
         
 1. 2019.02.25
