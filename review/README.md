@@ -36,7 +36,6 @@
     * Hadidi, Ramyad, Jiashen Cao, Micheal S. Ryoo, and Hyesoon Kim, **"Collaborative Execution of Deep Neural Networks on Internet of Things Devices."** *arXiv preprint arXiv:1901.02537* (2019). [[Link]](https://arxiv.org/abs/1901.02537) [[Review]]()
         * Abstract
         
-        
 1. 2019.02.18
     * Teerapittayanon, Surat, Bradley McDanel, and Hsiang-Tsung Kung. **"Distributed deep neural networks over the cloud, the edge and end devices."** *2017 IEEE 37th International Conference on Distributed Computing Systems (ICDCS).* IEEE, 2017. [[Link]](https://ieeexplore.ieee.org/abstract/document/7979979) [[Review]]()
         * Abstract
