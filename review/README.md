@@ -3,7 +3,7 @@
 
 ## Reviews
 1. 2019.06.05
-    * Han, Song, Huizi Mao, and William J. Dally. **"Deep compression: Compressing deep neural networks with pruning, trained quantization and huffman coding."** *arXiv preprint arXiv:1510.00149* (2015). [[Link]](https://arxiv.org/abs/1510.00149) [[Review]]()
+    * Han, Song, Huizi Mao, and William J. Dally. **"Deep compression: Compressing deep neural networks with pruning, trained quantization and huffman coding."** *arXiv preprint arXiv:1510.00149* (2015). [[Link]](https://arxiv.org/abs/1510.00149) <a href="./Slide/Slide_190605.pdf" target="_blank">[Review]</a>
         * Abstract
         
 1. 2019.05.15
