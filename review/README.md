@@ -41,10 +41,10 @@
         * Abstract
         
 1. 2019.01.24
-    * Hadidi, Ramyad, et al. **"Distributed Perception by Collaborative Robots."** *IEEE Robotics and Automation Letters* 3.4 (2018): 3709-3716. [[Link]](https://ieeexplore.ieee.org/abstract/document/8411096) [[Review]]()
+    * Hadidi, Ramyad, et al. **"Distributed Perception by Collaborative Robots."** *IEEE Robotics and Automation Letters* 3.4 (2018): 3709-3716. [[Link]](https://ieeexplore.ieee.org/abstract/document/8411096) [[Review]](https://github.com/junyoung1992/junyoung1992.github.io/raw/master/review/slide/Slide_190124_1.pdf)
         * Abstract
         
-    * Leroux, Sam, et al. **"Resource-constrained classification using a cascade of neural network layers."** *2015 International Joint Conference on Neural Networks (IJCNN).* IEEE, 2015. [[Link]](https://ieeexplore.ieee.org/abstract/document/7280601) [[Review]]()
+    * Leroux, Sam, et al. **"Resource-constrained classification using a cascade of neural network layers."** *2015 International Joint Conference on Neural Networks (IJCNN).* IEEE, 2015. [[Link]](https://ieeexplore.ieee.org/abstract/document/7280601) [[Review]](https://github.com/junyoung1992/junyoung1992.github.io/raw/master/review/slide/Slide_190124_2.pdf)
         * Abstract
           
 1. 2019.01.17
