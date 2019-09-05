@@ -1,6 +1,6 @@
 ---
-layout: default
-title: Profile
+layout: article
+title: 
 ---
 
 <div>
