@@ -1,6 +1,7 @@
 ---
 layout: article
 title: Profile
+show_title: false
 ---
 
 <div>
