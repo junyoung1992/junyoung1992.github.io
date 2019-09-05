@@ -36,7 +36,7 @@ timezone: Asia/Seoul # see https://en.wikipedia.org/wiki/List_of_tz_database_tim
 author:
   type      : # "person" (default), "organization"
   name      : Kim Junyoung
-  url       : 
+  url       : https://junyoung1992.github.io/
   avatar    : # path or url of avatar image (square)
   bio       : 
   email     : orsay0827@gmail.com
@@ -84,8 +84,8 @@ toc:
 ## => Markdown Enhancements
 ##############################
 ## Mathjax
-mathjax: # false (default), true
-mathjax_autoNumber: # false (default), true
+mathjax: true # false (default), true
+mathjax_autoNumber: true # false (default), true
 
 ## Mermaid
 mermaid: # false (default), true
