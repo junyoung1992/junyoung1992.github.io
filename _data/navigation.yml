@@ -1,5 +1,5 @@
 header:
-  - titles: Profile
+  - title: Profile
     url: /profile.html
 
   - titles:
@@ -19,5 +19,5 @@ header:
       ko-KR   : *KO
     url: /archive.html
 
-  - titles: Github
+  - title: Github
     url: https://github.com/junyoung1992
