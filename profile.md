@@ -1,6 +1,7 @@
 ---
-layout: page
+layout: article
 title: Profile
+excerpt_type: html
 ---
 
 <div>
