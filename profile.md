@@ -1,6 +1,6 @@
 ---
 layout: article
-title: About Me
+title: Profile
 ---
 
 <div>
