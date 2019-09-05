@@ -1,7 +1,6 @@
 ---
 layout: article
 title: Profile
-key: page-about
 ---
 
 ## Kim Junyoung
