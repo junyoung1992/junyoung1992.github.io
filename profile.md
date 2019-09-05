@@ -1,6 +1,6 @@
 ---
-layout: article
-title: 
+layout: page
+title: Profile
 ---
 
 <div>
