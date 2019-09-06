@@ -1,6 +1,9 @@
 header:
-  - title: Profile
-    url: /profile.html
+  - title: About
+    url: /about.html
+    
+    - title: Review
+    url: /review.html
 
   - titles:
       en      : &EN       Archive
