@@ -7,8 +7,8 @@ show_title: false
 ---
 
 # Reviews
-**Topic**<br/>
 *Neural Networks, Distributed Computing, Edge Computing, Compression, Computer Architecture*
+
 ## Classification
 ## Object Detection
 ## Compression
