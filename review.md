@@ -14,4 +14,4 @@ show_title: false
 ## Compression
 ## Distributed Computing for Edge Devices
 ## ETC
-* **[[Previous Reviews]](/_posts/2019-09-06-previous-reviews)**, 19.09.06
+* **[[Previous Reviews]](/2019/09/06/previous-reviews)**, 19.09.06
