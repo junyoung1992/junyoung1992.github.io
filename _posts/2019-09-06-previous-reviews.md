@@ -4,7 +4,7 @@ title: Previous Reviews
 mathjax: true
 aside:
   toc: true
-tags: CNN, Compression, Distributed Computing, Edge Computing
+tags: CNN Compression Distributed_Computing Edge_Computing
 ---
 
 # 2019.06.05
