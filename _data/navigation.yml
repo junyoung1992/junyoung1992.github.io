@@ -1,9 +1,9 @@
 header:
   - title: About
-    url: /about.html
+    url: /about
     
   - title: Review
-    url: /review.html
+    url: /review
 
   - titles:
       en      : &EN       Archive
@@ -20,7 +20,7 @@ header:
       zh-HK   : *ZH_HANT
       ko      : &KO       아카이브
       ko-KR   : *KO
-    url: /archive.html
+    url: /archive
 
   - title: Github
     url: https://github.com/junyoung1992
