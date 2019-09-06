@@ -1,6 +1,8 @@
 ---
 layout: article
-title: Review
+title: Reviews
+aside:
+  toc: true
 show_title: false
 ---
 
