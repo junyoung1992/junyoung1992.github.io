@@ -11,7 +11,7 @@ articles:
 ---
 
 <div class="layout--home">
-  {{ content }}
+  {%- include article/top/custom.html -%}
   
   {%- include paginator.html -%}
 </div>
@@ -20,4 +20,4 @@ articles:
   {%- include scripts/home.js -%}
 </script>
 
-
+{{ content }}
