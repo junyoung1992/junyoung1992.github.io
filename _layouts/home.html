@@ -10,7 +10,9 @@ articles:
   show_info: true
 ---
 
-{{ content }}
+<div class="layout--articles">
+  <h1 style="text-align:center">Posts</h1>
+</div>
 
 <div class="layout--home">
   {%- include paginator.html -%}
@@ -18,3 +20,5 @@ articles:
 <script>
   {%- include scripts/home.js -%}
 </script>
+
+{{ content }}
