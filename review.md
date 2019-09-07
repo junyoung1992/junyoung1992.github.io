@@ -3,7 +3,8 @@ layout: article
 title: Reviews
 aside:
   toc: true
-tags: Neural_Networks, Distributed_Computing, Edge_Computing, Compression, Computer_Architecture
+show_tags: true
+tags: Neural_Networks Distributed_Computing Edge_Computing Compression Computer_Architecture
 ---
 
 # Distributed Computing
