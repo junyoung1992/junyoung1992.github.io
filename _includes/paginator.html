@@ -1,8 +1,8 @@
-{%- if paginator.total_pages > 1 -%}
-  <div>
-    <h1 style="text-align:center">Posts</h1>
-  </div>
+<div>
+  <h1 style="text-align:center">Posts</h1>
+</div>
 
+{%- if paginator.total_pages > 1 -%}
   <div class="pagination">
 
     {%- include snippets/get-locale-string.html key='STATISTICS' -%}
