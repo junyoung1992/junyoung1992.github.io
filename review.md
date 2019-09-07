@@ -3,11 +3,13 @@ layout: article
 title: Reviews
 aside:
   toc: true
-show_tags: true
-tags: Neural_Networks Distributed_Computing Edge_Computing Compression Computer_Architecture
+show_title: false
 ---
 
-# Distributed Computing
+# Reviews
+*Neural Networks, Compression, Edge Computing, Distributed Computing*
 
-# ETC
+## Distributed Computing
+
+## ETC
 * **[[Previous Reviews]](/2019/09/06/previous-reviews.html)**, 19.09.06
