@@ -10,13 +10,13 @@ articles:
   show_info: true
 ---
 
-<div class="layout--articles">
-  <h1 style="text-align:center">Posts</h1>
-</div>
-
 <div class="layout--home">
+  <div>
+    <h1 style="text-align:center">Posts</h1>
+  </div>
   {%- include paginator.html -%}
 </div>
+
 <script>
   {%- include scripts/home.js -%}
 </script>
