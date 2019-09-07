@@ -1,6 +1,6 @@
 ---
 layout: article
-title: About
+title: Profile
 aside:
   toc: true
 show_title: false
