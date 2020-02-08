@@ -7,8 +7,8 @@ show_title: false
 ---
 
 # Kim Junyoung
-* Department of Computer Science and Engineering, Sejong University
 * System Design Lab, Sejong University <a href="http://sdl.sejong.ac.kr" target='_blank'>[Link]</a>
+* Department of Computer Science and Engineering, Sejong University
 
 ## Education
 * Master of Science in Computer Engineering (in progress)<br />
