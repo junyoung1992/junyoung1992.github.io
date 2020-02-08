@@ -2,7 +2,7 @@
 layout: article
 aside:
   toc: true
-title: Kim Junyoung
+title: About Me
 show_title: false
 ---
 
@@ -22,5 +22,5 @@ Sejong University, Seoul, Republic of Korea, 2012.03.02. ~ 2019.02.22.
 
 ## Honors and Awards
 1. 기민관, 한치원, 김준영. "특허청장상." 캠퍼스 특허전략 유니버시아드. 특허청. 2019.11.21. <a href="https://www.kipa.org/cpu/4_u2019.jsp" target='_blank'>[Link]</a>
-1. 김준영, 전종호, 기민관, 박기호. "최우수논문상." 사물 인터넷 부문. 2019 한국컴퓨터종합학술대회. 한국정보과학회. 2019.06.27.
+1. 김준영, 전종호, 기민관, 박기호. "최우수논문상." 사물 인터넷 부문. 2019 한국컴퓨터종합학술대회. 한국정보과학회. 2019.06.27. <a href="http://kiise.or.kr/conference/kcc/2019/" target='_blank'>[Link]</a>
 1. 기민관, 한치원, 김준영. "한국공학한림원회장상." 캠퍼스 특허전략 유니버시아드. 특허청. 2018.11.21. <a href="https://www.kipa.org/cpu/4_u2018.jsp" target='_blank'>[Link]</a>
