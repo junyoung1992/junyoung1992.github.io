@@ -2,6 +2,7 @@
 layout: article
 aside:
   toc: true
+title: Kim Junyoung
 show_title: false
 ---
 
