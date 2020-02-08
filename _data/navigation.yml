@@ -1,9 +1,6 @@
 header:
   - title: Profile
     url: /profile
-    
-  - title: Review
-    url: /review
 
   - title: Archive
     url: /archive
