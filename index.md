@@ -19,7 +19,7 @@ show_title: false
     * Advisor: Prof. Gi-Ho Park
     * GPA:
 * B.S. in Computer Engineering *(Mar. 2012 - Feb. 2019)*
-    * Sejong University, Seoul, Republic of Korea, 2012.03.02. ~ 2019.02.22.<br />
+    * Sejong University, Seoul, Republic of Korea<br />
     * GPA: 3.81/4.50
 
 ## Publications
