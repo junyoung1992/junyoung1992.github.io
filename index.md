@@ -11,11 +11,11 @@ show_title: false
 * Department of Computer Science and Engineering, Sejong University
 
 ## Education
-* M.S. in Computer Engineering
-    * Sejong University, Seoul, Republic of Korea, 2019.03.04. ~<br />
+* M.S. in Computer Engineering *(Mar. 2019 - Present)*
+    * Sejong University, Seoul, Republic of Korea<br />
     * Advisor: Prof. Gi-Ho Park
     * GPA:
-* B.S. in Computer Engineering
+* B.S. in Computer Engineering *(Mar. 2012 - Feb. 2019)*
     * Sejong University, Seoul, Republic of Korea, 2012.03.02. ~ 2019.02.22.<br />
     * GPA: 3.81/4.50
 
