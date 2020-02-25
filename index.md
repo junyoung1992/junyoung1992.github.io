@@ -11,10 +11,13 @@ show_title: false
 * Department of Computer Science and Engineering, Sejong University
 
 ## Education
-* Master of Science in Computer Engineering (in progress)<br />
-Sejong University, Seoul, Republic of Korea, 2019.03.04. ~
-* Bachelor of Science in Computer Engineering<br />
-Sejong University, Seoul, Republic of Korea, 2012.03.02. ~ 2019.02.22.
+* M.S. in Computer Engineering
+    * Sejong University, Seoul, Republic of Korea, 2019.03.04. ~<br />
+    * Advisor: Prof. Gi-Ho Park
+    * GPA:
+* B.S. in Computer Engineering
+    * Sejong University, Seoul, Republic of Korea, 2012.03.02. ~ 2019.02.22.<br />
+    * GPA: 3.81/4.50
 
 ## Publications
 1. 김준영, 전종호, 기민관, 박기호. "복수의 엣지 디바이스에서의 CNN 모델 분산 처리를 위한 축소된 분류 모델 활용에 대한 분석." 한국정보과학회 학술발표논문집. (2019): 290-292. <a href="http://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE08763159" target='_blank'>[Link]</a>
