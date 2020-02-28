@@ -3,12 +3,11 @@ layout: article
 aside:
   toc: true
 title: About Me
-show_title: True
 ---
 
 ## Kim Junyoung
-> System Design Lab, Sejong University <a href="http://sdl.sejong.ac.kr" target='_blank'>[Link]</a><br />
-> Department of Computer Science and Engineering, Sejong University
+*System Design Lab, Sejong University* <a href="http://sdl.sejong.ac.kr" target='_blank'>[Link]</a><br />
+*Department of Computer Science and Engineering, Sejong University*
 
 ### Interest
 * *Computer Architecture, Deep Learning, Edge Computing, Distributed Computing*
