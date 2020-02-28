@@ -2,8 +2,8 @@ header:
   - title: Profile
     url: /
 
-  - title: Archive
-    url: /archive
+  - title: Post
+    url: /post
 
   - title: Github
     url: https://github.com/junyoung1992
