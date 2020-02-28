@@ -3,10 +3,11 @@ layout: article
 aside:
   toc: true
 title: About Me
-show_title: True
+show_title: False
 ---
 
-# Kim Junyoung
+# About Me
+> **Kim Junyoung**<br />
 > System Design Lab, Sejong University <a href="http://sdl.sejong.ac.kr" target='_blank'>[Link]</a><br />
 > Department of Computer Science and Engineering, Sejong University
 
