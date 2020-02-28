@@ -6,8 +6,7 @@ title: About Me
 show_title: False
 ---
 
-# About Me
-> **Kim Junyoung**<br />
+# Kim Junyoung
 > System Design Lab, Sejong University <a href="http://sdl.sejong.ac.kr" target='_blank'>[Link]</a><br />
 > Department of Computer Science and Engineering, Sejong University
 
