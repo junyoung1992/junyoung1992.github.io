@@ -7,7 +7,7 @@ title: About Me
 
 ## Kim Junyoung <a href="https://orcid.org/0000-0002-9007-7145" target='_blank' style="vertical-align:top;"><img src="https://orcid.org/sites/default/files/images/orcid_16x16.png" alt="ORCID iD icon"></a>
 *System Design Lab, Sejong University* <a href="http://sdl.sejong.ac.kr" target='_blank'>[Link]</a><br />
-*Department of Computer Science and Engineering, Sejong University*
+*Department of Computer Science and Engineering, Sejong University* <a href="http://www.sejong.ac.kr" target='_blank'>[Link]</a>
 
 ### Interest
 * *Computer Architecture, Deep Learning, Edge Computing, Distributed Computing*
