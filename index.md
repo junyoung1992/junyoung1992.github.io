@@ -23,7 +23,7 @@ title: About Me
 
 ### Publications
 #### Papers
-1. Junyoung Kim, Jongho Jeon, Minkwan Kee, Gi-Ho Park, "The Method Using Reduced Classification Models for Distributed Processing of CNN Models in Multiple Edge Devices," *in Journal of KIISE*, vol. 47, no.8, pp.787-792, 2020.
+1. Junyoung Kim, Jongho Jeon, Minkwan Kee, Gi-Ho Park, "The Method Using Reduced Classification Models for Distributed Processing of CNN Models in Multiple Edge Devices," *in Journal of KIISE*, vol. 47, no.8, pp.787-792, 2020. <a href="https://doi.org/10.5626/JOK.2020.47.8.787" target='_blank'>[Link]</a>
 1. Junyoung Kim, Jongho Jeon, Minkwan Kee, Gi-Ho Park, "Analysis of Reduced Classification Model for Distributed Processing of CNN Model with Multiple Edge Devices," *Korea Computer Congress 2019*, 2019, pp.290-292. <a href="http://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE08763159" target='_blank'>[Link]</a>
 1. Junyoung Kim, Chiwon Han, Minkwan Kee, Gi-Ho Park, "Performance Analysis of Deep-leaning Applications for Efficient Execution on Edge Devices," *Korea Software Congress 2018*, 2018, pp.1713-1715. <a href="http://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE07614068" target='_blank'>[Link]</a>
 
