@@ -1,9 +1,11 @@
 ---
-title: "[프로그래머스] 해시 - 완주하지 못한 선수"
+title: "[프로그래머스] 해시 - 1 - 완주하지 못한 선수"
 tags: 알고리즘 프로그래머스
 ---
 
-## 1. 완주하지 못한 선수
+## 완주하지 못한 선수
+*https://programmers.co.kr/learn/courses/30/lessons/42576*
+
 ### 문제 설명
 수많은 마라톤 선수들이 마라톤에 참여하였습니다. 단 한 명의 선수를 제외하고는 모든 선수가 마라톤을 완주하였습니다.
 
@@ -15,14 +17,8 @@ tags: 알고리즘 프로그래머스
 * 참가자의 이름은 1개 이상 20개 이하의 알파벳 소문자로 이루어져 있습니다.
 * 참가자 중에는 동명이인이 있을 수 있습니다.
 
-### 입출력 예시
-|participant|completion|return|
-|---|---|---|
-|[leo, kiki, eden]|[eden, kiki]|leo|
-|[marina, josipa, nikola, vinko, filipa]|[josipa, filipa, marina, nikola]|vinko|
-|[mislav, stanko, mislav, ana]|[stanko, ana, mislav]|mislav|
-
 ### 코드
+*항상 출제자의 의도대로 풀지는 않음*
 ``` python
 def solution(participant, completion):
     participant.sort()
@@ -31,6 +27,5 @@ def solution(participant, completion):
     for i in range(len(completion)):
         if participant[i] != completion[i]:
             return participant[i]
-    
     return participant[-1]
 ```
