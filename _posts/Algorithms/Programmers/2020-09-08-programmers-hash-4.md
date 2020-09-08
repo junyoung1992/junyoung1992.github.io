@@ -3,7 +3,7 @@ title: "[프로그래머스] 해시 - 4 - 베스트앨범"
 tags: 알고리즘 프로그래머스
 ---
 
-## 전화번호 목록
+## 베스트앨범
 *https://programmers.co.kr/learn/courses/30/lessons/42579*
 
 ### 문제 설명

@@ -3,7 +3,7 @@ title: "[프로그래머스] 해시 - 3 - 위장"
 tags: 알고리즘 프로그래머스
 ---
 
-## 전화번호 목록
+## 위장
 *https://programmers.co.kr/learn/courses/30/lessons/42578*
 
 ### 문제 설명
