@@ -4,7 +4,7 @@ tags: 알고리즘 프로그래머스
 ---
 
 ## 전화번호 목록
-*https://programmers.co.kr/learn/courses/30/lessons/42578*
+*[](https://programmers.co.kr/learn/courses/30/lessons/42578)*
 
 ### 문제 설명
 스파이들은 매일 다른 옷을 조합하여 입어 자신을 위장합니다.
@@ -34,16 +34,16 @@ tags: 알고리즘 프로그래머스
 ``` python
 def solution(clothes):
     table = {}
-    for cloth in clothes:
-        if cloth[1] not in table.keys():
-            table[cloth[1]] = [cloth[0]]
+    for c, t in clothes:
+        if t not in table:
+            table[t] = 1
         else:
-            table[cloth[1]].append(cloth[0])
+            table[t] += 1
     print(table)
     
     answer = 1
     for t in table.values():
-        answer *= (len(t) + 1)
+        answer *= t + 1
     answer -= 1
     
     return answer
