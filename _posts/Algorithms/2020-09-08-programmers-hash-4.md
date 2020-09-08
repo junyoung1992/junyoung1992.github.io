@@ -30,15 +30,13 @@ def solution(genres, plays):
     count = {}
     table = {}
     
-    i = 0
-    for g, p in zip(genres, plays):
+    for i, (g, p) in enumerate(zip(genres, plays)):
         if g not in count:
             count[g] = p
             table[g] = [(i,p)]
         else:
             count[g] += p
             table[g].append((i,p))
-        i += 1
     
     sorted_count = sorted(count.items(), key = lambda x: -x[1])
     for t in table:
@@ -46,12 +44,10 @@ def solution(genres, plays):
         
     answer = []
     for g, p in sorted_count:
-        c = 0
-        for i, p in table[g]:
-            answer.append(i)
-            c += 1
+        for c, (i, p) in enumerate(table[g]):
             if c == 2:
                 break;
+            answer.append(i)
     
     return answer
 ```
