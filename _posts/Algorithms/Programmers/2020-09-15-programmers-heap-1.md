@@ -69,7 +69,8 @@ def solution(scoville, K):
     return answer
 ```
 
-*효율성 실패*
+▼ *효율성 실패*
+
 ``` python
 def solution(scoville, K):
     answer = 0
