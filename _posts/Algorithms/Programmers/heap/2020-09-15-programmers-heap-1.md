@@ -52,17 +52,14 @@ Leo가 가진 음식의 스코빌 지수를 담은 배열 scoville과 원하는 
 ### 코드
 
 ``` python
-from heapq import heappush, heappop
+from heapq import heapify, heappush, heappop
 
 def solution(scoville, K):
     answer = 0
-    heap = []
-    for s in scoville:
-        heappush(heap, s)
-    
-    while heap[0] < K:
+    heapify(scoville)
+    while scoville[0] < K:
         try:
-            heappush(heap, heappop(heap) + heappop(heap) * 2)
+            heappush(scoville, heappop(scoville) + heappop(scoville) * 2)
         except:
             return -1
         answer += 1

@@ -82,7 +82,6 @@ def solution(jobs):
     answer = 0
     heap = []
     
-    jobs.sort(key= lambda x: (x[0], x[1]))
     while completed < len(jobs):
         for s, t in jobs:            
             if last < s <= time:
