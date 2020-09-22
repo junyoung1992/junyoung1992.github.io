@@ -82,13 +82,12 @@ from itertools import permutations
 
 def solution(expression):
     answer = 0
-    priorities = [x for x in ['*', '+', '-'] if x in expression]
-    priorities = list(permutations(priorities))
+    priorities = list(permutations([x for x in ['*', '+', '-'] if x in expression]))
     
     def calc(n, expression):
         nonlocal priority
         if n == len(priority) - 1:
-            return eval(expression) # string 수식을 계산해줌
+            return eval(expression) # string 수식을 계산해
         if priority[n] == '*':
             return eval('*'.join([str(calc(n+1, e)) for e in expression.split('*')]))
         elif priority[n] == '+':
