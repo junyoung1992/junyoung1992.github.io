@@ -3,7 +3,7 @@ title: "[카카오] 2019 겨울 인턴십 - 5 - 징검다리 건너기"
 tags: 알고리즘 카카오
 ---
 
-## 호텔 방 배정
+## 징검다리 건너기
 
 *<https://programmers.co.kr/learn/courses/30/lessons/64062>*
 
