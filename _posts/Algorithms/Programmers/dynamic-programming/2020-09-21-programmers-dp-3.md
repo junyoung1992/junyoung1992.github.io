@@ -1,5 +1,5 @@
 ---
-title: "[프로그래머스] Dynamic Programming - 3 - 등굣길"
+title: "[프로그래머스] 동적계획법 - 3 - 등굣길"
 tags: 알고리즘 프로그래머스
 ---
 

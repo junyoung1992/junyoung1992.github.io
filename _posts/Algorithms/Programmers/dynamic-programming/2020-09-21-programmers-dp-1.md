@@ -1,5 +1,5 @@
 ---
-title: "[프로그래머스] Dynamic Programming - 1 - N으로 표현"
+title: "[프로그래머스] 동적계획법 - 1 - N으로 표현"
 tags: 알고리즘 프로그래머스
 ---
 

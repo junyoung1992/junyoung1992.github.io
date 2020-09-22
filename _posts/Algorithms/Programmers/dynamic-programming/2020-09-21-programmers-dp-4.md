@@ -1,5 +1,5 @@
 ---
-title: "[프로그래머스] Dynamic Programming - 4 - 도둑질"
+title: "[프로그래머스] 동적계획법 - 4 - 도둑질"
 tags: 알고리즘 프로그래머스
 ---
 
