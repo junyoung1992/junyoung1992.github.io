@@ -87,7 +87,7 @@ def solution(expression):
     def calc(n, expression):
         nonlocal priority
         if n == len(priority) - 1:
-            return eval(expression) # string 수식을 계산해
+            return eval(expression) # eval 함수는 string 수식, expression을 계산
         if priority[n] == '*':
             return eval('*'.join([str(calc(n+1, e)) for e in expression.split('*')]))
         elif priority[n] == '+':
