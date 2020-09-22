@@ -51,7 +51,7 @@ def solution(arrows):
     for a in arrows:
         x, y = d[a]
         
-        # 모래시계처럼 교차되는 형태를 고려하기 위해
+        # 모래시계처럼 교차되는 형태를 고려하기 위해 한 번에 두 칸씩 이동
         for _ in range(2):
             # 좌표 이동
             pos_next = (pos[0]+x,pos[1]+y)
