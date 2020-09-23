@@ -88,7 +88,7 @@ tags: 알고리즘 카카오
 
 ### 코드
 
-*재귀를 안 쓰고 풀어보자*
+*나중에 재귀를 안 쓰고 풀어보자*
 
 ``` python
 import sys
@@ -127,4 +127,8 @@ def solution(n, path, order):
     for node in graph[start]: dfs(node)
     
     return True if sum(visited) == n else False
+```
+
+``` python
+
 ```
