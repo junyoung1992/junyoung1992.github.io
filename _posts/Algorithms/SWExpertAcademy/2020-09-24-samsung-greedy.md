@@ -45,7 +45,6 @@ for tc in range(1, int(input())+1):
     print("#{} {}".format(tc, len(able)))
 ```
 
-
 ### 베이비진 게임
 
 ``` python
