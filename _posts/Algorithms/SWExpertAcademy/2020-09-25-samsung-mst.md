@@ -1,0 +1,156 @@
+---
+title: "[SW아카데미] 파이썬 S/W 문제해결 구현 - 그래프의 최소 비용 문제"
+tags: 알고리즘 SW아카데미
+---
+
+## 그래프의 최소 비용 문제
+
+*<https://swexpertacademy.com/main/learn/course/subjectDetail.do?courseId=AVuPDYSqAAbw5UW6&subjectId=AWUYHO7a2JoDFAVT>*
+
+### 최소 신장 트리
+
+``` python
+import math
+
+def mst_prim(start):
+    key = [math.inf] * length
+    pi = [0] * length
+    visited = [False] * length
+    key[start] = 0
+    
+    for _ in range(length): # 모든 노드를 탐색하면 종료
+        min_idx = -1
+        min_val = math.inf
+
+        for i in range(length):
+            if not visited[i] and key[i] < min_val:
+                min_val = key[i]
+                min_idx = i
+            
+        visited[min_idx] = True
+
+        for v, val in G[min_idx]:
+            if not visited[v] and val < key[v]:
+                key[v] = val
+                pi[v] = min_idx
+
+    return pi, key
+
+for tc in range(1, int(input())+1):
+    V, E = map(int, input().split())
+    length = V+1
+
+    G_list = list(list(map(int, input().split())) for _ in range(E))
+    G = [[] for _ in range(length)]
+    for e in G_list:
+        G[e[0]].append((e[1], e[2]))
+        G[e[1]].append((e[0], e[2]))
+
+    pi, key = mst_prim(0)
+    
+    print("#{} {}".format(tc, sum(key)))
+```
+
+### 최소 비용
+
+``` python
+import math
+
+def dijkstra(board):
+    key = [[math.inf] * N for _ in range(N)]
+    pi = [[None] * N for _ in range(N)]
+    visited = [[False] * N for _ in range(N)]
+    
+    key[0][0] = 0
+    pi[0][0] = (0, 0)
+    # 사방으로 가니까 가려고 예약한 곳 계속 가겠다고 하지 말라고 queue 대신 set 사용
+    check = set()
+    check.add((0, 0))
+
+    while check:
+        # 최소 key 찾기
+        min_key = math.inf
+        for j, i in check:
+            if key[i][j] < min_key and not visited[i][j]:
+                min_key = key[i][j]
+                y, x = i, j
+        
+        # 최소 key 찾으면 방문
+        visited[y][x] = True
+        check.remove((x, y))
+
+        # 목적지면 리턴
+        if y == x == N -1:
+            return pi, key
+
+        # 사방으로 움직이며 다음 지점 찾기
+        for dx, dy in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
+            nx, ny = x + dx, y + dy
+            # 방문하지 않은 곳이면 방문
+            if 0 <= nx < N and 0 <= ny < N and not visited[ny][nx]:
+                if board[y][x] < board[ny][nx]:
+                    fuel = key[y][x] + 1 + board[ny][nx] - board[y][x]
+                else:
+                    fuel = key[y][x] + 1
+                if fuel < key[ny][nx]:
+                    pi[ny][nx] = (x, y)
+                    key[ny][nx] = fuel
+                    check.add((nx, ny))
+
+for tc in range(1, int(input())+1):
+    N = int(input())
+    board = list(list(map(int, input().split())) for _ in range(N))
+
+    pi, key = dijkstra(board)
+    print("#{} {}".format(tc, key[N-1][N-1]))
+```
+
+### 최소 이동 거리
+
+``` python
+def short_path():
+    key = [float('inf')] * length
+    visited = [False] * length
+    pi = [0] * length
+
+    check = set()
+    check.add(0)
+    key[0] = 0
+
+    while check:
+        s = -1
+        min_key = float('inf')
+
+        for i in check:
+            if key[i] < min_key:
+                min_key = key[i]
+                s = i
+                break
+        
+        visited[s] = True
+        check.remove(s)
+
+        if s == N:
+            return pi, key
+
+        for e, w in G[s]:
+            if not visited[e] and key[s] + w < key[e]:
+                key[e] = key[s] + w
+                pi[e] = s
+                check.add(e)
+
+for tc in range(1, int(input())+1):
+    N, E = map(int, input().split())
+    length = N + 1
+
+    G = {}
+    for _ in range(E):
+        s, e, w = map(int, input().split())
+        if s in G:
+            G[s].append((e, w))
+        else:
+            G[s] = [(e, w)]
+
+    pi, key = short_path()
+    print("#{} {}".format(tc, key[N]))
+```
