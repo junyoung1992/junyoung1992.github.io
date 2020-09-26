@@ -9,6 +9,8 @@ tags: 알고리즘 SW아카데미
 
 ### 병합 정렬
 
+*Problem No.**5204***
+
 ``` python
 def merge_sort(arr):
     if len(arr) == 1:
@@ -50,6 +52,8 @@ for tc in range(1, int(input())+1):
 
 ### 퀵 정렬
 
+*Problem No.**5205***
+
 ``` python
 def quick_sort(arr, left, right):
     if left < right:
@@ -84,6 +88,8 @@ for tc in range(1, int(input())+1):
 ```
 
 ### 이진 탐색
+
+*Problem No.**5207***
 
 ``` python
 def binary_search(arr, key):

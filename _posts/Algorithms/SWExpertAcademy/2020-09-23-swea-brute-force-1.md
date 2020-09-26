@@ -9,6 +9,8 @@ tags: 알고리즘 SW아카데미
 
 ### 최소합
 
+*Problem No.**5188***
+
 ``` python
 import math
 
@@ -40,6 +42,8 @@ for i in range(1, int(input())+1):
 ```
 
 ### 전자 카트
+
+*Problem No.**5189***
 
 ``` python
 from itertools import permutations

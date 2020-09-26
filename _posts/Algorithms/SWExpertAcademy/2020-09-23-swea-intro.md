@@ -9,6 +9,8 @@ tags: 알고리즘 SW아카데미
 
 ### 이진수 1
 
+*Problem No.**5185***
+
 ``` python
 HEXA_DEC = {'A': 10, 'B': 11, 'C': 12, 'D': 13, 'E': 14, 'F': 15}
 
@@ -27,6 +29,8 @@ for i in range(1, int(input()) + 1):
 ```
 
 ### 이진수 2
+
+*Problem No.**5186***
 
 ``` python
 for i in range(1, int(input())+1):

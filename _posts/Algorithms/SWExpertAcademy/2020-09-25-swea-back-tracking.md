@@ -9,6 +9,8 @@ tags: 알고리즘 SW아카데미
 
 ### 전기버스2
 
+*Problem No.**5208***
+
 ``` python
 def DFS(idx):
     global count, temp
@@ -37,6 +39,8 @@ for tc in range(1, int(input())+1):
 ```
 
 ### 퀵 정렬
+
+*Problem No.**5209***
 
 ``` python
 def DFS(idx):

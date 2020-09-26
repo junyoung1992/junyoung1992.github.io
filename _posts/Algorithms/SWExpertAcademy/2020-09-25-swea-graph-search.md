@@ -9,6 +9,8 @@ tags: 알고리즘 SW아카데미
 
 ### 연산
 
+*Problem No.**5247***
+
 ``` python
 from collections import deque
 
@@ -53,6 +55,8 @@ for tc in range(1, int(input())+1):
 ```
 
 ### 그룹 나누기
+
+*Problem No.**5248***
 
 ``` python
 def find_set(x):    # 모든 하위 원소의 부모를 집합의 루트 원소로 설정
