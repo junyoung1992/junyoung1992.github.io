@@ -1,6 +1,6 @@
 ---
 title: "[프로그래머스] 월간 코드 챌린지 시즌 1 - 3 - 풍선 터트리기"
-tags: 알고리즘 Python3 프로그래머스
+tags: 알고리즘 Python3 프로그래머스 UNSOLVED
 ---
 
 ## 풍선 터트리기
@@ -38,6 +38,7 @@ tags: 알고리즘 Python3 프로그래머스
 ### 코드
 
 *효율성 망했어*
+
 ``` python
 def solution(a):
     answer = len(a)
