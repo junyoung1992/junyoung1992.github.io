@@ -1,9 +1,9 @@
 ---
-title: "[SW아카데미] 파이썬 S/W 문제해결 응용 - 동적계획법 소개"
+title: "[SW아카데미] 파이썬 S/W 문제해결 응용 - 동적계획법의 소개"
 tags: 알고리즘 Python3 SW아카데미
 ---
 
-## 동적계획법 소개
+## 동적계획법의 소개
 
 *<https://swexpertacademy.com/main/learn/course/subjectDetail.do?courseId=AVuPDYSqAAbw5UW6&subjectId=AWUYNNbK29EDFAVT>*
 

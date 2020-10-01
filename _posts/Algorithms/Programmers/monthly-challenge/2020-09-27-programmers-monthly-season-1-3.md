@@ -37,7 +37,7 @@ tags: 알고리즘 Python3 프로그래머스 UNSOLVED
 
 ### 코드
 
-*효율성 망했어*
+*효율성 망했어... 다시 풀자*
 
 ``` python
 def solution(a):
@@ -57,5 +57,32 @@ def solution(a):
         # 좌 우, 둘 중 하나는 가운데 원소보다 커야 가운데 원소를 남길 수 있다
         if left < num and num > right:
             answer -= 1
+    return answer
+```
+
+``` python
+def solution(a):
+    answer = 0
+    find = [{"left": 0, "right": 0} for _ in range(len(a))]
+
+    MAX_LEFT = float("inf")
+    MAX_RIGHT = float("inf")
+
+    # 각 a[i]에 대한 left 최솟값 탐색
+    for i, num in enumerate(a):
+        if num < MAX_LEFT:
+            MAX_LEFT = num
+        find[i]["left"] = MAX_LEFT
+    
+    # 각 a[i]에 대한 right 최솟값 탐색
+    for i, num in reversed(list(enumerate(a))):
+        if num < MAX_RIGHT:
+            MAX_RIGHT = num
+        find[i]["right"] = MAX_RIGHT
+    
+    for i, num in enumerate(a):
+        if num == find[i]["left"] or num == find[i]["right"]:
+            answer += 1
+        
     return answer
 ```
