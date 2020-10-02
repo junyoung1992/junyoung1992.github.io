@@ -60,6 +60,8 @@ def solution(a):
     return answer
 ```
 
+*그래서 다시 풀었다*
+
 ``` python
 def solution(a):
     answer = 0
@@ -68,13 +70,13 @@ def solution(a):
     MAX_LEFT = float("inf")
     MAX_RIGHT = float("inf")
 
-    # 각 a[i]에 대한 left 최솟값 탐색
+    # 각 a[i]에 대한 left 최솟값 탐색 (a[i] 포함)
     for i, num in enumerate(a):
         if num < MAX_LEFT:
             MAX_LEFT = num
         find[i]["left"] = MAX_LEFT
     
-    # 각 a[i]에 대한 right 최솟값 탐색
+    # 각 a[i]에 대한 right 최솟값 탐색 (a[i] 포함)
     for i, num in reversed(list(enumerate(a))):
         if num < MAX_RIGHT:
             MAX_RIGHT = num
