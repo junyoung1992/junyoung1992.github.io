@@ -1,6 +1,6 @@
 ---
 title: "[프로그래머스] Summer/Winter Coding(2019) - 2 - 지형 이동"
-tags: 알고리즘 Python3 프로그래머스 UNSOLVED
+tags: 알고리즘 Python3 프로그래머스
 ---
 
 ## 지형 이동
@@ -59,18 +59,18 @@ N x N 크기인 정사각 격자 형태의 지형이 있습니다. 각 격자 �
 *일단 각 영역을 분리했는데... 최단 거리는??*
 
 ``` python
-from collections import deque
+from collections import deque, defaultdict
 import math
 
 def bfs(x, y, N, land, visited, height, group):
-    direction = [(0, 1), (0, -1), (-1, 0), (1, 0)]
+    DIRECTION = [(0, 1), (0, -1), (-1, 0), (1, 0)]
     queue = deque([[x, y]])
     
     while queue:
         x, y = queue.popleft()
         visited[y][x] = group
         
-        for dx, dy in direction:
+        for dx, dy in DIRECTION:
             nx, ny = x + dx, y + dy
             
             if (0 <= nx < N) and (0 <= ny < N) and \
@@ -78,8 +78,34 @@ def bfs(x, y, N, land, visited, height, group):
                     visited[ny][nx] = group
                     queue.append([nx, ny])
 
+def find_ladder(N, land, visited, height, ladder):
+    for y in range(N):
+        for x in range(N):
+            nx = x + 1
+            ny = y + 1
+            
+            if (nx < N) and (visited[y][x] != visited[y][nx]):
+                a, b = min(visited[y][x], visited[y][nx]), max(visited[y][x], visited[y][nx])
+                ladder[(a, b)] = min(ladder[a, b], abs(land[y][x] - land[y][nx]))
+                
+            if (ny < N) and (visited[y][x] != visited[ny][x]):
+                a, b = min(visited[y][x], visited[ny][x]), max(visited[y][x], visited[ny][x])
+                ladder[(a, b)] = min(ladder[a, b], abs(land[y][x] - land[ny][x]))
+
+def find_root(a, root):
+    if a == root[a]:
+        return a
+    else:
+        r = find_root(root[a], root)
+        root[a] = r
+        return r
+    
+def union(a, b, root):
+    a = find_root(a, root)
+    b = find_root(b, root)
+    root[b] = a
+
 def solution(land, height):
-    answer = 0
     N = len(land)
     visited = [[0] * N for _ in range(N)]
     
@@ -91,7 +117,23 @@ def solution(land, height):
                 bfs(x, y, N, land, visited, height, group)
                 group += 1
     
-    print(visited)
+    # 각 그룹을 잇는 사다리 계산
+    ladder = defaultdict(lambda: float("inf"))
+    find_ladder(N, land, visited, height, ladder)
+    ladder = sorted(ladder.items(), key = lambda x: x[1])
+    
+    # 최소 사다리 설치
+    nodes = {i: i for i in range(1, group)}
+    answer = 0
+    
+    for (a, b), cost in ladder:
+        # 그룹 a와 그룹 b가 이어지지 않았다면
+        if find_root(a, nodes) != find_root(b, nodes):
+            union(a, b, nodes)
+            answer += cost
+        # 모든 그룹이 이어졌다면
+        if len(nodes.values()) == 1:
+            break
     
     return answer
 ```
