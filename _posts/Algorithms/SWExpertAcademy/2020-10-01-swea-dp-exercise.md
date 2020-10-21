@@ -9,7 +9,7 @@ tags: 알고리즘 Python3 SW아카데미 UNSOLVED
 
 ### 정렬된 부분 집합
 
-*Problem No.**5258***
+*Problem No.**5262***
 
 ``` python
 for tc in range(1, int(input())+1):
@@ -34,16 +34,24 @@ for tc in range(1, int(input())+1):
 
 ### 그래프의 최소 비용
 
-*Problem No.**5260***
+*Problem No.**5263***
 
 ``` python
+for tc in range(1, int(input())+1):
+    N = int(input())
+    nodes = [list(map(int, input().split())) for _ in range(N)]
 
+    # print("#{} {}".format(tc, max(len_list)))
 ```
 
 ### 전기카트 2
 
-*Problem No.**5260***
+*Problem No.**5265***
 
 ``` python
+for tc in range(1, int(input())+1):
+    N = int(input())
+    battery = [list(map(int, input().split())) for _ in range(N)]
 
+    # print("#{} {}".format(tc, ))
 ```
