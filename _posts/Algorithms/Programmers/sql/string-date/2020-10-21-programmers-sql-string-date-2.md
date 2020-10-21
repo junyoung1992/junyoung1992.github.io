@@ -1,6 +1,6 @@
 ---
 title: "[프로그래머스] SQL - String, Date - 2 - 이름에 el이 들어가는 동물 찾기"
-tags: SQL
+tags: SQL 프로그래머스
 ---
 
 ## 이름에 el이 들어가는 동물 찾기

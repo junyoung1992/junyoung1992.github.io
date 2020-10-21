@@ -1,6 +1,6 @@
 ---
 title: "[프로그래머스] Summer/Winter Coding(2019) - 3 - 우유와 요거트가 담긴 장바구니"
-tags: 알고리즘 Python3 프로그래머스
+tags: SQL 프로그래머스
 ---
 
 ## 지형 이동

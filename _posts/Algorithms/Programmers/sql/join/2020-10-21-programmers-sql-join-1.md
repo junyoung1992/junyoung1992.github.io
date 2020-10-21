@@ -1,6 +1,6 @@
 ---
 title: "[프로그래머스] SQL - JOIN - 1 - 없어진 기록 찾기"
-tags: SQL
+tags: SQL 프로그래머스
 ---
 
 ## 없어진 기록 찾기

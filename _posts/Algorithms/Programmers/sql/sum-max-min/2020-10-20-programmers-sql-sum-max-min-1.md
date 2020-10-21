@@ -1,6 +1,6 @@
 ---
 title: "[프로그래머스] SQL - SUM, MAX, MIN - 1 - 최댓값 구하기"
-tags: SQL
+tags: SQL 프로그래머스
 ---
 
 ## 최댓값 구하기

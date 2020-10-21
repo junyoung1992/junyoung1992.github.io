@@ -1,6 +1,6 @@
 ---
 title: "[프로그래머스] SQL - SUM, MAX, MIN - 3 - 동물 수 구하기"
-tags: SQL
+tags: SQL 프로그래머스
 ---
 
 ## 동물 수 구하기

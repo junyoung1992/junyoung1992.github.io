@@ -1,6 +1,6 @@
 ---
 title: "[프로그래머스] SQL - String, Date - 3 - 중성화 여부 파악하기"
-tags: SQL
+tags: SQL 프로그래머스
 ---
 
 ## 중성화 여부 파악하기

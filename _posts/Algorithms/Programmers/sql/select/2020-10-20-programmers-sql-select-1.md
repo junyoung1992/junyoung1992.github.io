@@ -1,6 +1,6 @@
 ---
 title: "[프로그래머스] SQL - SELECT - 1 - 모든 레코드 조회하기"
-tags: SQL
+tags: SQL 프로그래머스
 ---
 
 ## 모든 레코드 조회하기

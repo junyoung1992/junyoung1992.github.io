@@ -1,6 +1,6 @@
 ---
 title: "[프로그래머스] SQL - GROUP BY - 4 - 입양 시각 구하기(2)"
-tags: SQL
+tags: SQL 프로그래머스
 ---
 
 ## 입양 시각 구하기(2)

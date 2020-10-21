@@ -1,6 +1,6 @@
 ---
 title: "[프로그래머스] SQL - String, Date - 5 - DATETIME에서 DATE로 형 변환"
-tags: SQL
+tags: SQL 프로그래머스
 ---
 
 ## DATETIME에서 DATE로 형 변환

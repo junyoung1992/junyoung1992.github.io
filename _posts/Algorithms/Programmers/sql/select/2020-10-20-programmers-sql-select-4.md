@@ -1,6 +1,6 @@
 ---
 title: "[프로그래머스] SQL - SELECT - 4 - 어린 동물 찾기"
-tags: SQL
+tags: SQL 프로그래머스
 ---
 
 ## 어린 동물 찾기

@@ -1,6 +1,6 @@
 ---
 title: "[프로그래머스] SQL - GROUP BY - 2 - 동명 동물 수 찾기"
-tags: SQL
+tags: SQL 프로그래머스
 ---
 
 ## 동명 동물 수 찾기

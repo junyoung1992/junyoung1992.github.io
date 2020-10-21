@@ -1,6 +1,6 @@
 ---
 title: "[프로그래머스] SQL - SUM, MAX, MIN - 4 - 중복 제거하기"
-tags: SQL
+tags: SQL 프로그래머스
 ---
 
 ## 중복 제거하기

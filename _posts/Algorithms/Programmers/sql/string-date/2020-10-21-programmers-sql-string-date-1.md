@@ -1,6 +1,6 @@
 ---
 title: "[프로그래머스] SQL - String, Date - 1 - 루시와 엘라 찾기"
-tags: SQL
+tags: SQL 프로그래머스
 ---
 
 ## 루시와 엘라 찾기

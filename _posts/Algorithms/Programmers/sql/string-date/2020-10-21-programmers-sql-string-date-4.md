@@ -1,6 +1,6 @@
 ---
 title: "[프로그래머스] SQL - String, Date - 4 - 오랜 기간 보호한 동물(2)"
-tags: SQL
+tags: SQL 프로그래머스
 ---
 
 ## 오랜 기간 보호한 동물(2)

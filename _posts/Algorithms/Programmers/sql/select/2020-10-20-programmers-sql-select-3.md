@@ -1,6 +1,6 @@
 ---
 title: "[프로그래머스] SQL - SELECT - 3 - 아픈 동물 찾기"
-tags: SQL
+tags: SQL 프로그래머스
 ---
 
 ## 아픈 동물 찾기
