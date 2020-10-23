@@ -3,7 +3,7 @@ title: "[프로그래머스] Summer/Winter Coding(~2018) - 9 - 숫자 게임"
 tags: 알고리즘 Python3 프로그래머스
 ---
 
-## 기지국 설치
+## 숫자 게임
 
 *<https://programmers.co.kr/learn/courses/30/lessons/12987>*
 
