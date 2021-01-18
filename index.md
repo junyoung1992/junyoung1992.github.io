@@ -8,9 +8,9 @@ show_title: false
 
 ## Kim Junyoung <a href="https://orcid.org/0000-0002-9007-7145" target='_blank' style="vertical-align:top;"><img src="https://orcid.org/sites/default/files/images/orcid_16x16.png" alt="ORCID iD icon"></a>
 
-*CJ OliveNetworks (Jan. 2021. - Present)* <a href="https://www.cjolivenetworks.co.kr:449" target='_blank'>[Link]</a><br />
-*System Design Lab, Sejong University (Sept. 2018. - Dec. 2020.)* <a href="http://sdl.sejong.ac.kr" target='_blank'>[Link]</a><br />
-*Department of Computer Science and Engineering, Sejong University (Mar. 2012. - Feb. 2021.)* <a href="http://www.sejong.ac.kr" target='_blank'>[Link]</a>
+*CJ OliveNetworks (Jan. 2021. - Present)*<br />
+*System Design Lab, Sejong University (Sept. 2018. - Dec. 2020.)*<br />
+*Department of Computer Science and Engineering, Sejong University (Mar. 2012. - Feb. 2021.)*
 
 ### Projects
 
@@ -20,12 +20,12 @@ show_title: false
 
 ### Education
 
-M.S. in Computer Engineering *(Mar. 2019. - Feb. 2021.)*<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sejong University, Seoul, Republic of Korea *(GPA: 4.36 / 4.50)*<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Advisor: Prof. Gi-Ho Park
+M.S. in Computer Engineering *(Mar. 2019. - Feb. 2021.)*<br />
+Sejong University, Seoul, Republic of Korea *(GPA: 4.36 / 4.50)*<br />
+Advisor: Prof. Gi-Ho Park
 
-B.S. in Computer Engineering *(Mar. 2012. - Feb. 2019.)*<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sejong University, Seoul, Republic of Korea *(GPA: 3.81 / 4.50)*
+B.S. in Computer Engineering *(Mar. 2012. - Feb. 2019.)*<br />
+Sejong University, Seoul, Republic of Korea *(GPA: 3.81 / 4.50)*
 
 ### Publications
 
