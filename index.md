@@ -13,20 +13,20 @@ show_title: false
 *Department of Computer Science and Engineering, Sejong University (Mar. 2012. - Feb. 2021.)* <a href="http://www.sejong.ac.kr" target='_blank'>[Link]</a>
 
 ### Interest
----
+
 *Computer Architecture, Deep Learning, Edge Computing, Distributed Computing, Acceleration*
 
 ### Education
----
+
 M.S. in Computer Engineering *(Mar. 2019. - Feb. 2021.)*<br>
-&nbsp;&nbsp;&nbsp;&nbsp;Sejong University, Seoul, Republic of Korea *(GPA: 4.36 / 4.50)*<br>
-&nbsp;&nbsp;&nbsp;&nbsp;Advisor: Prof. Gi-Ho Park
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sejong University, Seoul, Republic of Korea *(GPA: 4.36 / 4.50)*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Advisor: Prof. Gi-Ho Park
 
 B.S. in Computer Engineering *(Mar. 2012. - Feb. 2019.)*<br>
-&nbsp;&nbsp;&nbsp;&nbsp;Sejong University, Seoul, Republic of Korea *(GPA: 3.81 / 4.50)*
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sejong University, Seoul, Republic of Korea *(GPA: 3.81 / 4.50)*
 
 ### Publications
----
+
 #### Papers
 
 Junyoung Kim, Jongho Jeon, Minkwan Kee, Gi-Ho Park, "The Method Using Reduced Classification Models for Distributed Processing of CNN Models in Multiple Edge Devices," *in Journal of KIISE*, vol. 47, no.8, pp.787-792, 2020. <a href="https://doi.org/10.5626/JOK.2020.47.8.787" target='_blank'>[Link]</a>
@@ -40,8 +40,6 @@ Junyoung Kim, Chiwon Han, Minkwan Kee, Gi-Ho Park, "Performance Analysis of Deep
 Gi-Ho Park, Junyoung Kim, Jongho Jeon, Minkwan Kee, "CLASSIFICATION METHOD USING DISTRIBUTED CLASSIFICATION MODEL", Korea Patent 10-2020-0076297, June 23, 2020.
 
 ### Honors and Awards
-
----
 
 기민관, 한치원, 김준영. "특허청장상." 캠퍼스 특허전략 유니버시아드. 특허청. 2019.11.21. <a href="https://www.kipa.org/cpu/4_u2019.jsp" target='_blank'>[Link]</a>
 
