@@ -6,26 +6,30 @@ title: Profile
 show_title: false
 ---
 
-## Kim Junyoung <a href="https://orcid.org/0000-0002-9007-7145" target='_blank' style="vertical-align:top;"><img src="https://orcid.org/sites/default/files/images/orcid_16x16.png" alt="ORCID iD icon"></a>
+## Kim Junyoung <a href="https://orcid.org/0000-0002-9007-7145" target='_blank' style="vertical-align:top;"><img src="https://orcid.org/sites/default/files/images/orcid_16x16.png" alt="ORCID iD icon"></a> 
 
-*CJ OliveNetworks (Jan. 2021. - Present)*<br />
-*System Design Lab, Sejong University (Sept. 2018. - Dec. 2020.)*<br />
-*Department of Computer Science and Engineering, Sejong University (Mar. 2012. - Feb. 2021.)*
-
-### Projects
+*Email: orsay0827@gmail.com*
 
 ### Interest
 
 *Computer Architecture, Deep Learning, Edge Computing, Distributed Computing, Acceleration*
 
+### Career
+
+*CJ OliveNetworks (Jan. 2021. - Present)*<br />
+*System Design Lab, Sejong University (Sept. 2018. - Dec. 2020.)*<br />
+*Department of Computer Science and Engineering, Sejong University (Mar. 2012. - Feb. 2021.)*
+
+### Project
+
 ### Education
 
 M.S. in Computer Engineering *(Mar. 2019. - Feb. 2021.)*<br />
-Sejong University, Seoul, Republic of Korea *(GPA: 4.36 / 4.50)*<br />
+Sejong University, Gwangjin-gu, Seoul, Republic of Korea *(GPA: 4.36 / 4.50)*<br />
 Advisor: Prof. Gi-Ho Park
 
 B.S. in Computer Engineering *(Mar. 2012. - Feb. 2019.)*<br />
-Sejong University, Seoul, Republic of Korea *(GPA: 3.81 / 4.50)*
+Sejong University, Gwangjin-gu, Seoul, Republic of Korea *(GPA: 3.81 / 4.50)*
 
 ### Publications
 
