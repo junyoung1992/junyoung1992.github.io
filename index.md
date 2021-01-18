@@ -6,9 +6,12 @@ title: Profile
 show_title: false
 ---
 
-## 김준영, Kim Junyoung <a href="https://orcid.org/0000-0002-9007-7145" target='_blank' style="vertical-align:top;"><img src="https://orcid.org/sites/default/files/images/orcid_16x16.png" alt="ORCID iD icon"></a> 
+## Kim Junyoung <a href="https://orcid.org/0000-0002-9007-7145" target='_blank' style="vertical-align:top;"><img src="https://orcid.org/sites/default/files/images/orcid_16x16.png" alt="ORCID iD icon"></a> 
 
 *Email: <a href="mailto:orsay0827@gmail.com">orsay0827@gmail.com</a>*
+
+### Interest
+*Machine Learning, Compression, Acceleration, Computer Architecture*
 
 ### Career
 
@@ -36,7 +39,7 @@ show_title: false
 #### Patents
 
 <a>분산된 분류 모델을 이용하는 분류 방법</a><br />
-CT/KR2020/008157. 2020.06.23<br />
+PCT/KR2020/008157. 2020.06.23<br />
 박기호. 김준영. 전종호. 기민관.
 
 <a>분산된 분류 모델을 이용하는 분류 방법</a><br />
