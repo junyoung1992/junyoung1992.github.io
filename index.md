@@ -3,6 +3,7 @@ layout: article
 aside:
   toc: true
 title: Profile
+show_title: false
 ---
 
 ## Kim Junyoung <a href="https://orcid.org/0000-0002-9007-7145" target='_blank' style="vertical-align:top;"><img src="https://orcid.org/sites/default/files/images/orcid_16x16.png" alt="ORCID iD icon"></a>
@@ -17,7 +18,7 @@ title: Profile
 * M.S. in Computer Engineering *(Mar. 2019. - Feb. 2021.)*
     * Sejong University, Seoul, Republic of Korea
     * Advisor: Prof. Gi-Ho Park
-    * GPA: 4.00 / 4.50
+    * GPA: 4.36 / 4.50
 * B.S. in Computer Engineering *(Mar. 2012. - Feb. 2019.)*
     * Sejong University, Seoul, Republic of Korea
     * GPA: 3.81 / 4.50
