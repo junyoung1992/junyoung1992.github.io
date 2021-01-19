@@ -8,19 +8,13 @@ show_title: false
 
 ## Kim Junyoung <a href="https://orcid.org/0000-0002-9007-7145" target='_blank' style="vertical-align:top;"><img src="https://orcid.org/sites/default/files/images/orcid_16x16.png" alt="ORCID iD icon"></a> 
 
+*Software Engineer. CJ OliveNetworks.*<br />
 *Email: <a href="mailto:orsay0827@gmail.com">orsay0827@gmail.com</a>*
 
-### Interest
-*Machine Learning, Compression, Acceleration, Computer Architecture.*
+### Experience
 
-### Career
-
-*CJ OliveNetworks. 2021.01. - Present.*<br />
-*System Design Lab. 세종대학교. 2018.09. - 2020.12.*<br />
-*세종대학교 일반대학원 컴퓨터공학과 석사과정. 2019.03. - 2021.02.*<br />
-*세종대학교 컴퓨터공학과. 2012.03. - 2019.02.*<br />
-
-### Project
+#### *Digital Service Division. CJ OliveNetworks. 2021.01. - Present.*
+#### *System Design Lab. 세종대학교. 2018.09. - 2020.12.*
 
 **차세대 응용을 위한 데이터 중심 가속기 기반 컴퓨팅 시스템 구조 설계.** *2018.09. - 2020.12.*<br />
 한국연구재단.
@@ -32,6 +26,15 @@ show_title: false
 **2018 캠퍼스 특허전략 유니버시아드.** *2018.04. - 2018.08.*<br />
 *삼성전자 - A11: 인공지능칩 시장 진입을 위한 특허전략.*<br />
 한국발명진흥회.
+
+### Education
+
+*세종대학교 일반대학원 컴퓨터공학과 석사과정. 2019.03. - 2021.02.*<br />
+*세종대학교 컴퓨터공학과. 2012.03. - 2019.02.*<br />
+
+### Skills
+
+*C. Python. OpenCL. PyTorch.*
 
 ### Publications
 
@@ -59,7 +62,7 @@ PCT/KR2020/008157. 2020.06.23.<br />
 KR 10-2020-0076297. 2020.06.23.<br />
 박기호. 김준영. 전종호. 기민관.
 
-### Honors and Awards
+### Awards
 
 <a href="https://www.kipa.org/cpu/4_u2019.jsp" target='_blank'>특허청장상 - A11: 인공지능 메모리 시장 진입을 위한 특허전략.</a><br />
 캠퍼스 특허전략 유니버시아드. 특허청. 2019.11.21.<br />
