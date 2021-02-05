@@ -1,5 +1,5 @@
 ---
-title: "AWS AWS Technical Professional"
+title: "AWS Technical Professional"
 tags: Cloud AWS
 ---
 
