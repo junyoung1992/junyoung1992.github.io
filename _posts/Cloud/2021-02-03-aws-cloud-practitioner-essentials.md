@@ -3,7 +3,7 @@ title: "AWS Cloud Practitioner Essentials"
 tags: Cloud AWS
 ---
 
-*https://www.aws.training/Details/Curriculum?id=32442*
+*<https://www.aws.training/Details/Curriculum?id=32442>*
 
 ## M1. AWS 소개
 
@@ -43,7 +43,7 @@ AWS는 광범위한 클라우드 기반 제품을 제공
 AWS를 사용하는 세 가지 방법
 
 1. AWS Management Console
-    
+1. 
     **장점**<br />
     탐색, 사용성, 편리한 모바일 앱
 
@@ -54,6 +54,7 @@ AWS를 사용하는 세 가지 방법
     스크립트를 생성할 수 있는 유연성
 
 3. SDK
+
     **장점**<br />
     기존 애플리케이션에서 AWS를 사용할 수 있는 능력<br />
     애플리케이션을 생성할 수 있는 유연성
@@ -114,7 +115,8 @@ AWS에서 보안 그룹은 가상 서버에 대해 내장된 방화벽과 같은
 
 **Application Load Balancer**<br />
 Elastic Load Balancer 서비스의 일부로 도입된 두 번째 유형의 로드 밸런서<br />
-Classic Load Balancer가 제공하는 대부분의 기능 제공<br />
+Classic Load Balancer가 제공하는 대부분의 기능 제공
+
 \+ 향상된 기능
 - 프로토콜 지원 (HTTP, HTTPS, HTTP/2, WebSockets)
 - CloudWatch 지표 (추가적인 로드 밸런싱 지표 및 그룹 지표 차원)
