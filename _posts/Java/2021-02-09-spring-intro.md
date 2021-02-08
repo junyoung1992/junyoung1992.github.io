@@ -100,7 +100,7 @@ java -jar  build/libs/hello-spring-0.0.1-SNAPSHOT.jar
 - 스프링 부트 정적 컨텐츠 기능
     - Reference에서 Static 검색
     - `src/main/resource/static` 에 생성
-![SPRING#0002](0002_hello-static.png)
+![SPRING#0002](/assets/images/spring/0002_hello-static.png)
 - 간단한 구조 설명
     - 내장 톰캣 서버가 스프링 컨테이너 탐색
     - hello-static 관련 컨트롤러가 없으면 resources: static/hello-static.html 탐색
