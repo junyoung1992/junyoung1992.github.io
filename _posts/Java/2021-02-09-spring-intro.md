@@ -564,3 +564,168 @@ public class SpringConfig {
 - 정형화 되지 않거나, 상황에 따라 구현 클래스를 변경해야 하면 설정을 통해 스프링 빈으로 등록
 - `@Autowired`를 통한 DI는 `helloConroller`, `memberService` 등과 같이 스프링이 관리하는 객체에서만 동작
     - 스프링 빈으로 등록하지 않고 내가 직접 생성한 객체(예: `new MemberService();`)에서는 동작하지 않음
+
+## 5. 회원 관리 예제 - 웹 MVC 개발
+
+### 회원 웹 기능 - 홈 화면 추가
+
+```java
+@Controller
+public class HomeController {
+    @GetMapping("/")
+    public String home() {
+        return "home";
+    }
+}
+```
+
+```html
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+    <div class="container">
+        <div>
+        <h1>Hello Spring</h1>
+        <p>회원기능</p>
+        <p>
+            <a href="/members/new">회원가입</a>
+            <a href="/members">회원목록</a>
+        </p>
+        </div>
+    </div>  <!-- /container -->
+</body>
+</html>
+```
+- 컨트롤러가 정적 파일보다 우선되므로 `home.html`이 출력됨
+
+### 화면 웹 기능 - 등록
+
+```java
+@Controller
+public class MemberController {
+    private final MemberService memberService;
+
+    @Autowired
+    public MemberController(MemberService memberService) {
+        this.memberService = memberService;
+    }
+
+    @GetMapping("/members/new")
+    public String createForm() {
+        return "members/createMemberForm";
+    }
+
+    @PostMapping("/members/new")
+    public String create(MemberForm form) {
+        Member member = new Member();
+        member.setName(form.getName());
+
+        memberService.join(member);
+
+        return "redirect:/";
+    }
+}
+```
+
+```java
+public class MemberForm {
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    private String name;
+}
+```
+
+```html
+<!DOCTYPE HTML><html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<div class="container">
+    <form action="/members/new"method="post">
+        <div class="form-group">
+            <label for="name">이름</label>
+            <input type="text"id="name" name="name"placeholder="이름을입력하세요">
+        </div>
+        <button type="submit">등록</button>
+    </form>
+</div><!-- /container -->
+
+</body>
+</html>
+```
+- `form` 태그 내에서 post 방식으로 `/members/new`에 데이터 전송
+    - `input` 태그에 입력받은 정보를 전송.
+    - `name="name"`: 전송되는 값의 key 값
+- URL이 같아도 `@GetMapping`, `@PostMapping`을 통해 다르게 사용 가능
+
+### 회원 웹 기능 - 조회
+
+```java
+@Controller
+public class MemberController {
+    private final MemberService memberService;
+
+    @Autowired
+    public MemberController(MemberService memberService) {
+        this.memberService = memberService;
+    }
+
+    @GetMapping("/members/new")
+    public String createForm() {
+        return "members/createMemberForm";
+    }
+
+    @PostMapping("/members/new")
+    public String create(MemberForm form) {
+        Member member = new Member();
+        member.setName(form.getName());
+
+        memberService.join(member);
+
+        return "redirect:/";
+    }
+
+    @GetMapping("/members")
+    public String list(Model model) {
+        List<Member> members = memberService.findMembers();
+        model.addAttribute("members", members);
+        return "members/memberList";
+    }
+}
+```
+
+```html
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<div class="container">
+    <div>
+        <table>
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>이름</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="member : ${members}">
+                <td th:text="${member.id}"></td>
+                <td th:text="${member.name}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div><!-- /container -->
+
+</body>
+</html>
+```
+- `model`에 저장된 `members`를 읽어서 출력
+    - `th:each`(thymeleaf 문법)를 사용해 `members` 리스트를 반복해서 읽고 출력
+- 현재는 메모리에 저장했기 때문에 서버를 내리면 데이터가 모두 지워짐

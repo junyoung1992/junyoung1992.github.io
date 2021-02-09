@@ -17,16 +17,19 @@ show_title: false
 
 #### *System Design Lab. 세종대학교. 2018.09. - 2020.12.*
 
-**차세대 응용을 위한 데이터 중심 가속기 기반 컴퓨팅 시스템 구조 설계.** *2018.09. - 2020.12.*<br />
-한국연구재단.
+**차세대 응용을 위한 데이터 중심 가속기 기반 컴퓨팅 시스템 구조 설계.**<br />
+한국연구재단. *2018.09. - 2020.12.*
 ### Education
 
 세종대학교 일반대학원 컴퓨터공학과 석사과정. *2019.03. - 2021.02.*<br />
+학위 논문: 다중 엣지 장치 기반 딥러닝 분산처리 기법
+
 세종대학교 컴퓨터공학과. *2012.03. - 2019.02.*
 
 ### Skills
 
-*C. Python. OpenCL. PyTorch.*
+Languages: C. Java. Python.<br />
+Frameworks: Spring. OpenCL. TensorFlow. PyTorch.
 
 ### Publications
 
