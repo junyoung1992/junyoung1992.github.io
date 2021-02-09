@@ -46,9 +46,9 @@ show_title: false
 
 #### Patents
 
-<a>분산된 분류 모델을 이용하는 분류 방법.</a><br />
-KR 10-2020-0076297. 2020.06.23.<br />
-PCT/KR2020/008157. 2020.06.23.<br />
+**분산된 분류 모델을 이용하는 분류 방법.**<br />
+<a href="https://doi.org/10.8080/1020200076297" target='_blank'>KR 10-2021-0000674 A.</a> 2021.01.05.<br />
+<a href="https://patentscope.wipo.int/search/ko/detail.jsf?docId=WO2020262932" target='_blank'>WO 2020 262932 A1.</a> 2020.12.30.<br />
 박기호. 김준영. 전종호. 기민관.
 
 ### Awards
