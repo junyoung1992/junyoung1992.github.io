@@ -186,7 +186,7 @@ Amazon S3는 99.999999999%의 내구성과 99.99%의 가용성을 제공<br />
 - Amazon One Zone - Infrequent Access(S3 One Zone-IA)
     - 액세스 빈도가 낮은 데이터용으로 사용
     - 다른 S3 스토리지 클래스는 최소 3개의 가용 영역에 데이터를 저장하는 반면, S3 One Zone-IA는 단일 AZ에 데이터를 저장
-        - S3 Standard-IA보다 20@ 저렴함
+        - S3 Standard-IA보다 20% 저렴함
     - S3 Standard, S3 Standard-IA 스토리지와 같은 가용성 및 복원력이 필요하지 않는 고객에게 적합
     - 온프레미스 데이터 또는 쉽게 다시 생성할 수 있는 보조 백업 복사본을 저장하는 경우 좋은 옵션
 - Amazon S3 Glacier(S3 Glacier), Amazon Glacier Deep Archive(S3 Glacier Deep Archive)
