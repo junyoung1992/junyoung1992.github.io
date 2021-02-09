@@ -69,12 +69,27 @@ tags: Java Spring
 ```java
 @Controller
 public class HelloController {
+
     @GetMapping("hello")
     public String hello(Model model) {
         model.addAttribute("data", "hello!!");
         return "hello";
     }
+
 }
+```
+
+```html
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Hello</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+    <p th:text="'안녕하세요. ' + ${data}" >안녕하세요. 손님</p>
+</body>
+</html>
 ```
 
 ![SPRING#0001](/assets/images/spring/0001_thymeleaf.png)
@@ -106,3 +121,41 @@ java -jar  build/libs/hello-spring-0.0.1-SNAPSHOT.jar
     - 내장 톰캣 서버가 스프링 컨테이너 탐색
     - hello-static 관련 컨트롤러가 없으면 resources: static/hello-static.html 탐색
     - hello-static.html 웹 출력
+
+### MVC와 템플릿 엔진
+
+MVC: Model, View, Controller
+- 과거에는 View와 Controller가 구분되지 않았음
+- 현재는 View와 Controller를 구분하여 역할을 정확하게 나눔
+    - View는 화면을 그리는데 집중
+    - Controller는 비즈니스 로직, 내부적인 처리에 집중
+
+```java
+@Controller
+public class HelloController {
+
+    @GetMapping("hello-mvc")
+    public String helloMvc(@RequestParam("name") String name, Model model) {
+         model.addAttribute("name", name);
+    return "hello-template";
+    }
+
+}
+```
+
+```html
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+    <p th:text="'hello ' + ${name}">hello! empty</p>
+</body>
+</html>
+```
+
+![SPRING#0003](/assets/images/sping/0003_hello-mvc.png)
+- 간단한 구조 설명
+
+### API
+
+- 정적 컨텐츠 방식을 제외하면 두 가지 방식이 있음
+    - HTML
+    - API
