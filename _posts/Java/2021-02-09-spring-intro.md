@@ -71,13 +71,11 @@ tags: Java Spring Inflearn
 ```java
 @Controller
 public class HelloController {
-
     @GetMapping("hello")
     public String hello(Model model) {
         model.addAttribute("data", "hello!!");
         return "hello";
     }
-
 }
 ```
 
@@ -135,13 +133,11 @@ MVC: Model, View, Controller
 ```java
 @Controller
 public class HelloController {
-
     @GetMapping("hello-mvc")
     public String helloMvc(@RequestParam("name") String name, Model model) {
          model.addAttribute("name", name);
     return "hello-template";
     }
-
 }
 ```
 
@@ -165,7 +161,6 @@ public class HelloController {
 ```java
 @Controller
 public class HelloController {
-	
 	@GetMapping("hello-string")
 	@ResponseBody	// HTTP의 Body 부분에 내용을 직접 넣어줌
 	public String helloString(@RequestParam("name") String name) {
@@ -191,7 +186,6 @@ public class HelloController {
 			this.name = name;
 		}
 	}
-    
 }
 ```
 - `@ResponseBody`를 사용하고 객체를 반환하면 객체가 JSON(기본)으로 변환
@@ -229,18 +223,15 @@ public class HelloController {
 
 ```java
 public interface MemberRepository {
-	
 	Member save(Member member);
 	Optional<Member> findById(Long id);
 	Optional<Member> findByName(String name);
 	List<Member> findAll();
-	
 }
 ```
 
 ```java
 public class MemoryMemberRepository implements MemberRepository{
-	
 	// 실무에서는 동시성 문제가 있을 수 있기 때문에 ConcurrentHashMap, AtomicLong 등 사용...
 	private static Map<Long, Member> store = new HashMap<>();
 	private static long sequence = 0L;
@@ -269,7 +260,6 @@ public class MemoryMemberRepository implements MemberRepository{
 	public List<Member> findAll() {
 		return new ArrayList<>(store.values());
 	}
-	
 }
 ```
 
@@ -279,18 +269,15 @@ public class MemoryMemberRepository implements MemberRepository{
 
 ```java
 public interface MemberRepository {
-	
 	Member save(Member member);
 	Optional<Member> findById(Long id);
 	Optional<Member> findByName(String name);
 	List<Member> findAll();
-	
 }
 ```
 
 ```java
 public class MemoryMemberRepository implements MemberRepository{
-	
 	// 실무에서는 동시성 문제가 있을 수 있기 때문에 ConcurrentHashMap, AtomicLong 등 사용...
 	private static Map<Long, Member> store = new HashMap<>();
 	private static long sequence = 0L;
@@ -323,7 +310,6 @@ public class MemoryMemberRepository implements MemberRepository{
 	public void clearStore() {
 		store.clear();
 	}
-	
 }
 ```
 
@@ -379,7 +365,6 @@ public class MemoryMemberRepositoryTest {
 		
 		assertThat(result.size()).isEqualTo(2);
 	}
-	
 }
 ```
 - `@AfterEach`는 각 테스트가 종료될 때마다 실행되는 기능
@@ -387,4 +372,140 @@ public class MemoryMemberRepositoryTest {
 
 ### 회원 서비스 개발
 
+```java
+public class MemberService {
+	private final MemberRepository memberRepository = new MemoryMemberRepository();
+	
+	/**
+	 * 회원가입
+	 * @param member
+	 * @return
+	 */
+	public Long join(Member member) {
+		/**
+		 * // 같은 이름이 있는 중복 회원은 불가
+		 * Optional<Member> result = memberRepository.findByName(member.getName());
+		 * result.ifPresent(m -> {
+		 *     throw new IllegalStateException("이미 존재하는 회원입니다.");
+		 * });
+		*/
+		
+		/**
+         * // Extract Method -> validateDuplicateMember 생성
+		 * memberRepository.findByName(member.getName())
+		 * 	.ifPresent(m -> {
+		 * 		throw new IllegalStateException("이미 존재하는 회원입니다.");
+		 * 	});
+		 */
+		
+		validateDuplicateMember(member); // 중복 회원 검증
+		
+		memberRepository.save(member);
+		
+		return member.getId();
+	}
+
+	private void validateDuplicateMember(Member member) {
+		memberRepository.findByName(member.getName())
+			.ifPresent(m -> {
+				throw new IllegalStateException("이미 존재하는 회원입니다.");
+			});
+	}
+	
+	/**
+	 * 전체 회원 조회
+	 * @return
+	 */
+	public List<Member> findMembers() {
+		return memberRepository.findAll();
+	}
+	
+	public Optional<Member> findOne(Long memberId) {
+		return memberRepository.findById(memberId);
+	}
+}
+```
+- Extract Method: 그룹으로 함께 묶을 코드 블럭이 있으면 Method로 생성
+
 ### 회원 서비스 테스트
+
+```java
+public class MemberService {
+	
+	// 오직 한 번만 사용할 수 있는 entity에 final 사용 -> 상속 불가, 초기화 단 한 번
+	private final MemberRepository memberRepository;
+	
+    // 회원 서비스 코드를 DI(의존성 주입)가 가능하게 변경
+	public MemberService(MemberRepository memberRepository) {
+		this.memberRepository = memberRepository;
+	}
+    ...
+}
+```
+
+```java
+class MemberServiceTest {
+	MemberService memberService;
+	MemoryMemberRepository memberRepository;
+	
+    // 각 테스트 이전에 실행되는 코드
+	@BeforeEach
+	public void beforeEach() {
+		memberRepository = new MemoryMemberRepository();
+		memberService = new MemberService(memberRepository);
+	}
+
+	@AfterEach
+	public void afterEach() {
+		memberRepository.clearStore();
+	}
+
+	@Test
+	// 빌드될 때 포함되지 않으므로 한글로 만들기도 함
+	void 회원가입() {
+		// Given
+		Member member = new Member();
+		member.setName("spring");
+		
+		// When
+		Long saveId = memberService.join(member);
+		
+		// Then
+		Member findMember = memberService.findOne(saveId).get();
+		assertThat(member.getName()).isEqualTo(findMember.getName());
+	}
+	
+	@Test
+	public void 중복_회원_예약() {
+		// Given
+		Member member1 = new Member();
+		member1.setName("spring");
+		
+		Member member2 = new Member();
+		member2.setName("spring");
+		
+		// When
+
+		memberService.join(member1);
+		IllegalStateException e = assertThrows(IllegalStateException.class, () -> memberService.join(member2));
+		
+		assertThat(e.getMessage()).isEqualTo("이미 존재하는 회원입니다.");
+/*
+		try {
+			memberService.join(member2);
+			fail();
+		} catch (IllegalStateException e) {
+			Assertions.assertThat(e.getMessage()).isEqualTo("이미 존재하는 회원입니다.");
+		}
+*/
+		
+		// Then
+	}
+}
+```
+
+## 4. 스프링 빈과 의존관계
+
+### 컴포넌트 스캔과 자동 의존관계 설정
+
+### 자바 코드로 직접 스프링 빈 등록하기
