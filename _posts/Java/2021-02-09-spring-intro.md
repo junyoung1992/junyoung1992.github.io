@@ -527,11 +527,13 @@ public class MemberController {
 
 스프링 빈을 등록하는 2가지 방법
 - 컴포넌트 스캔과 자동 의존 관계 설정
-    - `@Component` 애노테이션이 있으면 스프링 빈으로 자동 등록
-    - 컴포넌트 스캔 덕분에 자동으로 등록
-        - `@Component` 를 포함하는 다음 애노테이션도 스프링 빈으로 자동 등록된다.
-        - `@Controller`, `@Service`, `@Repository`
 - 자바 코드로 직접 스프링 빈 등록하기
+
+컴포넌트 스캔과 자동 의존 관계 설정
+- `@Component` 애노테이션이 있으면 스프링 빈으로 자동 등록
+- 컴포넌트 스캔 덕분에 자동으로 등록
+    - `@Component` 를 포함하는 다음 애노테이션도 스프링 빈으로 자동 등록된다.
+    - `@Controller`, `@Service`, `@Repository`
 
 ![SPRING#0007](/assets/images/spring/0007_spring-bean.png)
 - 컴포넌트 스캔을 활용한 스프링 빈 등록
