@@ -92,7 +92,7 @@ public class HelloController {
 </html>
 ```
 
-![SPRING#0001](/assets/images/spring/0001_thymeleaf.png)
+![SPRING#0001](/assets/images/spring-intro/0001_thymeleaf.png)
 - 간단한 구조 설명
     - 컨트롤러에서 리턴 값으로 문자를 반환하면 뷰 리졸버(viewResolver)가 화면을 찾아서 처리
         - 스프링 부트 템플릿엔진 기본 viewName 매핑
@@ -116,7 +116,7 @@ java -jar  build/libs/hello-spring-0.0.1-SNAPSHOT.jar
     - Reference에서 Static 검색
     - `src/main/resource/static` 에 생성
 
-![SPRING#0002](/assets/images/spring/0002_hello-static.png)
+![SPRING#0002](/assets/images/spring-intro/0002_hello-static.png)
 - 간단한 구조 설명
     - 내장 톰캣 서버가 스프링 컨테이너 탐색
     - hello-static 관련 컨트롤러가 없으면 resources: static/hello-static.html 탐색
@@ -149,7 +149,7 @@ public class HelloController {
 </html>
 ```
 
-![SPRING#0003](/assets/images/spring/0003_hello-mvc.png)
+![SPRING#0003](/assets/images/spring-intro/0003_hello-mvc.png)
 - 간단한 구조 설명
 
 ### API
@@ -190,7 +190,7 @@ public class HelloController {
 ```
 - `@ResponseBody`를 사용하고 객체를 반환하면 객체가 JSON(기본)으로 변환
 
-![SPRING#0004](/assets/images/spring/0004_hello-api.png)
+![SPRING#0004](/assets/images/spring-intro/0004_hello-api.png)
 - `@ResponseBody`를 사용
     - HTTP의 BODY에 문자 내용을 직접 반환
     - `viewResolver`대신에 `HttpMessageConverter`가 동작
@@ -208,13 +208,13 @@ public class HelloController {
 - 기능: 회원 등록, 조회
 - 아직 데이터 저장소가 선정되지 않음
 
-![SPRING#0005](/assets/images/spring/0005_hierarchy.png)
+![SPRING#0005](/assets/images/spring-intro/0005_hierarchy.png)
 - 일반적인 웹 애플리케이션 계층 구조
     - 도메인: 회원, 주문, 쿠폰 등 주로 데이터베이스에 저장되는 비즈니스 도메인 객체
     - 서비스: 핵심 비즈니스 로직을 구현한 계층
     - 컨트롤러, 리포지토리, DB, ...
 
-![SPRING#0006](/assets/images/spring/0006_class-dependency.png)
+![SPRING#0006](/assets/images/spring-intro/0006_class-dependency.png)
 - 클래스 의존 관계
     - 회원 정보는 인터페이스로 구현
     - 간단히 메모리 기반 구현체로 만들고 추후 구체적인 기술이 정의되면 DB에 연동
@@ -508,7 +508,7 @@ class MemberServiceTest {
 
 멤버 컨트롤러가 멤버 서비스를 통해서 회원가입하고 조회 
 
-![SPRING#0003](/assets/images/spring/0003_hello-mvc.png)
+![SPRING#0003](/assets/images/spring-intro/0003_hello-mvc.png)
 - `@Controller` Notation을 기입하면 스프링 컨테이너에 해당 컨트롤러에 대한 스프링 빈이 생성됨
 
 ```java
@@ -535,7 +535,7 @@ public class MemberController {
     - `@Component` 를 포함하는 다음 애노테이션도 스프링 빈으로 자동 등록된다.
     - `@Controller`, `@Service`, `@Repository`
 
-![SPRING#0007](/assets/images/spring/0007_spring-bean.png)
+![SPRING#0007](/assets/images/spring-intro/0007_spring-bean.png)
 - 컴포넌트 스캔을 활용한 스프링 빈 등록
 - 스프링 컨테이너에 스프링 빈을 등록할 때, 기본으로 싱글톤으로 등록(유일하게 하나만 등록해서 공유)
     - 같은 스프링 빈이면 모두 같은 인스턴스
@@ -928,19 +928,8 @@ public class JdbcMemberRepository implements MemberRepository {
 ```java
 @Configuration
 public class SpringConfig {
-	
-	private DataSource dataSource;
-	
-	@Autowired
-	public SpringConfig(DataSource dataSource) {
-		this.dataSource = dataSource;
-	}
-	
-    @Bean
-    public MemberService memberService() {
-        return new MemberService(memberRepository());
-    }
-
+    ......
+    
     @Bean
     public MemberRepository memberRepository() {
         // return new MemoryMemberRepository();
@@ -953,16 +942,364 @@ public class SpringConfig {
 
 ### 스프링 통합 테스트
 
+```java
+@SpringBootTest
+@Transactional  // 테스트가 끝나면 롤백함
+class MemberServiceIntegrationTest {
+    // 테스트할 때는 편한게 좋음
+    @Autowired MemberService memberService;
+    @Autowired MemberRepository memberRepository;
+
+    @Test
+    void 회원가입() throws Exception {
+        // Given
+        Member member = new Member();
+        member.setName("spring");
+
+        // When
+        Long saveId = memberService.join(member);
+
+        // Then
+        Member findMember = memberRepository.findById(saveId).get();
+        assertThat(member.getName()).isEqualTo(findMember.getName());
+    }
+
+    @Test
+    void 중복_회원_예외() {
+        // Given
+        Member member1 = new Member();
+        member1.setName("spring");
+
+        Member member2 = new Member();
+        member2.setName("spring");
+
+        // When
+        memberService.join(member1);
+        // 예외가 발생해야 함
+        IllegalStateException e = assertThrows(IllegalStateException.class, () -> memberService.join(member2));
+
+        assertThat(e.getMessage()).isEqualTo("이미 존재하는 회원입니다.");
+    }
+}
+```
+- `@SpringBootTest`: 스프링 컨테이너와 테스트를 함께 실행
+- `@Transactional`: 테스트 케이스에 이 애노테이션이 있으면, 테스트 시작 전에 트랜잭션을 시작하고, 테스트 완료 후에 항상 롤백
+    - DB에 데이터가 남지 않으므로 다음 테스트에 영향을 주지 않음
+- 통합 테스트도 필요하긴 하지만 단위 테스트로 분할하여 테스트를 수행하는게 일반적으로 좋음
+
 ### 스프링 JdbcTemplate
+
+- 순수 Jdbc와 동일한 환경 설정
+- 스프링 JdbcTemplate과 MyBatis 같은 라이브러리
+    - JDBC API에서 본 반복코드를 대부분 제거
+    - 하지만 SQL은 직접 작성
+
+```java
+public class JdbcTemplateMemberRepository implements MemberRepository {
+    private final JdbcTemplate jdbcTemplate;
+
+    // 생성자가 딱 하나일 경우 Autowired 생략 가능
+    @Autowired
+    public JdbcTemplateMemberRepository(DataSource dataSource) {
+        jdbcTemplate = new JdbcTemplate(dataSource);
+    }
+
+    @Override
+    public Member save(Member member) {
+        SimpleJdbcInsert jdbcInsert = new SimpleJdbcInsert(jdbcTemplate);
+        jdbcInsert.withTableName("member").usingGeneratedKeyColumns("id");
+
+        Map<String, String> parameters = new HashMap<>();
+        parameters.put("name", member.getName());
+
+        Number key = jdbcInsert.executeAndReturnKey(new MapSqlParameterSource(parameters));
+        member.setId(key.longValue());
+        return member;
+    }
+
+    @Override
+    public Optional<Member> findById(Long id) {
+        List<Member> result = jdbcTemplate.query("SELECT * FROM MEMBER WHERE ID = ?", memberRowMapper(), id);
+        return result.stream().findAny();
+    }
+
+    @Override
+    public Optional<Member> findByName(String name) {
+        List<Member> result = jdbcTemplate.query("SELECT * FROM MEMBER WHERE NAME = ?", memberRowMapper(), name);
+        return result.stream().findAny();
+    }
+
+    @Override
+    public List<Member> findAll() {
+        return jdbcTemplate.query("SELECT * FROM MEMBER", memberRowMapper());
+    }
+
+    private RowMapper<Member> memberRowMapper() {
+/**
+ *       Lambda로 변경 가능
+ *       return new RowMapper<Member>() {
+ *           @Override
+ *           public Member mapRow(ResultSet rs, int rowNum) throws SQLException {
+ *               Member member = new Member();
+ *               member.setId(rs.getLong("id"));
+ *               member.setName(rs.getString("name"));
+ *               return member;
+ *           }
+ *       }
+ */
+        return (rs, rowNum) -> {
+            Member member = new Member();
+            member.setId(rs.getLong("id"));
+            member.setName(rs.getString("name"));
+            return member;
+        };
+    }
+}
+```
+
+```java
+@Configuration
+public class SpringConfig {
+    ......
+
+    @Bean
+    public MemberRepository memberRepository() {
+        // return new MemoryMemberRepository();
+    	// return new JdbcMemberRepository(dataSource);
+        return new JdbcTemplateMemberRepository(dataSource);
+    }
+}
+```
 
 ### JPA
 
+- JPA는 기존의 반복 코드 뿐만 아니라, 기본적인 SQL도 JPA가 직접 생성
+    - JPA를 사용하면, SQL과 데이터 중심의 설계에서 객체 중심의 설계로 패러다임 전환 가능
+    - JPA를 사용해 개발 생산성을 크게 높일 수 있음
+
+```gradle
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+//	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	runtimeOnly 'com.h2database:h2'
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
+}
+```
+
+```java
+public class JpaMemberRepository implements MemberRepository{
+    // JPA는 EntityManager로 동작
+    private final EntityManager em;
+
+    public JpaMemberRepository(EntityManager em) {
+        this.em = em;
+    }
+
+    @Override
+    public Member save(Member member) {
+        em.persist(member);
+        return member;
+    }
+
+    @Override
+    public Optional<Member> findById(Long id) {
+        Member member = em.find(Member.class, id);
+        return Optional.ofNullable(member);
+    }
+
+    @Override
+    public Optional<Member> findByName(String name) {
+        List<Member> result = em.createQuery("SELECT m FROM Member m WHERE m.name = :name", Member.class)
+                .setParameter("name", name)
+                .getResultList();
+
+        return result.stream().findAny();
+    }
+
+    @Override
+    public List<Member> findAll() {
+        return em.createQuery("SELECT m FROM Member m", Member.class).getResultList();
+    }
+}
+```
+
+```java
+// JPA에서 Entity 관리
+@Entity
+public class Member {
+    // DB가 알아서 생성해주는 것을 Identity라고 함
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String name;
+    
+    ...
+}
+```
+
+```java
+/**
+ * JPA를 사용하면 항상 Transactional이 필요함
+ * 필요한 메서드 위에만 작성해도 됨
+ */
+@Transactional
+public class MemberService {
+    ...
+}
+```
+- 스프링은 해당 클래스의 메서드를 실행할 때 트랜잭션을 시작하고, 메서드가 정상 종료되면 트랜잭션을 커밋함
+    - 만약 런타임 예외가 발생하면 롤백
+- JPA를 통한 모든 데이터 변경은 트랜잭션 안에서 실행해야 함
+
+```java
+@Configuration
+public class SpringConfig {
+	
+//	private DataSource dataSource;
+//
+//	@Autowired
+//	public SpringConfig(DataSource dataSource) {
+//		this.dataSource = dataSource;
+//	}
+
+    private EntityManager em;
+
+    @Autowired
+    public SpringConfig(EntityManager em) {
+        this.em = em;
+    }
+
+    @Bean
+    public MemberService memberService() {
+        return new MemberService(memberRepository());
+    }
+
+    @Bean
+    public MemberRepository memberRepository() {
+        // return new MemoryMemberRepository();
+    	// return new JdbcMemberRepository(dataSource);
+        // return new JdbcTemplateMemberRepository(dataSource);
+        return new JpaMemberRepository(em);
+    }
+}
+```
+
 ### 스프링 데이터 JPA
+
+- 스프링 부트와 JPA를 통해 개발 생산성 향상
+- 스프링 데이터 JPA를 사용해 구현 클래스 없이 인터페이스만으로 개발 완료
+    - 반복 개발해 온 기본 CRUD 기능도 모두 제공
+
+```java
+public interface SpringDataJpaMemberRepository extends JpaRepository<Member, Long>, MemberRepository {
+    // 단순한 메서드는 인터페이스만으로도 자동화
+    // JPQL: SELECT m FROM Member m WHERE m.name = ?
+    @Override
+    Optional<Member> findByName(String name);
+}
+```
+
+```java
+@Configuration
+public class SpringConfig {
+	
+//	private DataSource dataSource;
+//
+//	@Autowired
+//	public SpringConfig(DataSource dataSource) {
+//		this.dataSource = dataSource;
+//	}
+
+//    private EntityManager em;
+//
+//    @Autowired
+//    public SpringConfig(EntityManager em) {
+//        this.em = em;
+//    }
+
+    private final MemberRepository memberRepository;
+
+    @Autowired
+    public SpringConfig(MemberRepository memberRepository) {
+        this.memberRepository = memberRepository;
+    }
+
+    @Bean
+    public MemberService memberService() {
+//        return new MemberService(memberRepository());
+        return new MemberService(memberRepository);
+    }
+
+//    @Bean
+//    public MemberRepository memberRepository() {
+//        // return new MemoryMemberRepository();
+//    	// return new JdbcMemberRepository(dataSource);
+//        // return new JdbcTemplateMemberRepository(dataSource);
+//        return new JpaMemberRepository(em);
+//    }
+}
+```
+- 스프링데이터 JPA가 `SpringDataJpaMemberRepository`를 스프링 빈으로 자동 등록
+
+![SPRING#0009](/assets/images/spring-intro/0008_spring-data-jpa.png)
+- 스프링 데이터 JPA가 제공하는 기능
+    - 인터페이스를 통한 기본적인 CRUD
+    - `findByName()`, `findByEmail()`처럼 메서드 이름만으로도 조회 기능 구현 가능
+    - 페이징 기능 자동 제공
+- 실무에서는 JPA와 스프링 데이터 JPA를 기본으로 사용
+- 복잡한 동적 쿼리는 Querydsl 라이브러리를 사용
+- 이보다 복잡한 쿼리는 JPA 네이티브 쿼리를 사용하거나 Jdbc를 사용하여 구현
 
 ## 7. AOP
 
 ### AOP가 필요한 상황
 
+
+- 모든 메소드의 호출 시간을 측정하고 싶을 때
+    - 문제!!
+    - 시간 측정은 핵심 관심 사항이 아닌 공통 관심 사항임
+    - 시간 측정 로직과 비즈니스 로직이 섞이면 유지보수가 어려움
+    - 시간 측정 로직은 별도의 공통 로직으로 만들기 어려우며, 변경 시 모든 로직을 찾아가며 변경해야 함
+
 ### AOP 적용
+
+```java
+@Aspect
+@Component
+public class TimeTraceAop {
+    @Around("execution(* hello.hellospring..*(..))")
+    public Object execute(ProceedingJoinPoint joinPoint) throws Throwable {
+        long start = System.currentTimeMillis();
+        System.out.println("START: " + joinPoint.toString());
+
+        try {
+            return joinPoint.proceed();
+        } finally {
+            long finish = System.currentTimeMillis();
+            long timeMs = finish - start;
+            System.out.println("END: " + joinPoint.toString() + " " + timeMs + "ms");
+        }
+    }
+}
+```
+- 핵심 관심 사항과 시간 측정과 같은 공통 관심 사항을 분리
+- 시간 측정 로직을 별도 구현
+- 원하는 적용 대상 선택 가능
+
+**AOP 적용 전 의존 관계**
+![SPRING#0009](/assets/images/spring-intro/0009_no-aop.png)
+
+**AOP 적용 후 의존 관계**
+![SPRING#0010](/assets/images/spring-intro/0010_aop.png)
+
+**AOP 적용 전 전체 그림**
+![SPRING#0011](/assets/images/spring-intro/0011_all-no-aop.png)
+
+**AOP 적용 후 전체 그림**
+![SPRING#0012](/assets/images/spring-intro/0012_all-aop.png)
 
 ## 8. 다음으로
