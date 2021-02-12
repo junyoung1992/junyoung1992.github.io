@@ -1,7 +1,5 @@
 ---
 layout: article
-aside:
-  toc: true
 title: About
 show_title: false
 ---
@@ -10,15 +8,11 @@ show_title: false
 
 <div style="text-align: right"><i>Last Updated: 2021.02.13.</i></div>
 
-여러가지 공부하는 것을 좋아하는, 그냥 **프로그래머** 입니다.
+여러가지 공부하는 것을 좋아하는, 그냥 **프로그래머** 입니다.<br />
+*Machine Learning, Computer Architecture, IoT, Cloud, etc.*
 
 **GitHub** <https://github.com/junyoung1992><br />
 **Contact** <orsay0827@gmail.com>
-
-## Skills
-
-**Languages** C, Java, Python<br />
-**Frameworks** Spring, OpenCL, Pytorch, TensorFlow
 
 # Experiences
 
@@ -39,7 +33,7 @@ show_title: false
 ### 차세대 응용을 위한 데이터 중심 가속기 기반 컴퓨팅 시스템 구조 설계
 
 **Period** 2018.03. - 2021.02. (**Attend** 2018.09. - 2020.12.)<br />
-**Sponsor** 과학기술정보통신부 - 한국연구재단
+**Sponsor** 과학기술정보통신부 / 한국연구재단
 
 #### Description
 
