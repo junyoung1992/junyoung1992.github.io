@@ -2,68 +2,95 @@
 layout: article
 aside:
   toc: true
-title: Profile
+title: About
 show_title: false
 ---
 
-## Kim Junyoung <a href="https://orcid.org/0000-0002-9007-7145" target='_blank' style="vertical-align:top;"><img src="https://orcid.org/sites/default/files/images/orcid_16x16.png" alt="ORCID iD icon"></a> 
+# 김준영 (Kim Junyoung)
 
-*System Engineer. CJ OliveNetworks.*<br />
-*Email: <a href="mailto:orsay0827@gmail.com">orsay0827@gmail.com</a>*
+<div style="text-align: right"><i>Last Updated: 2021.02.13.</i></div>
 
-### Experience
+여러가지 공부하는 것을 좋아하는, 그냥 **프로그래머** 입니다.
 
-#### *Digital Service Division. CJ OliveNetworks. 2021.01. - Present.*
+**GitHub** <https://github.com/junyoung1992><br />
+**Contact** <orsay0827@gmail.com>
 
-#### *System Design Lab. 세종대학교. 2018.09. - 2020.12.*
+## Skills
 
-**차세대 응용을 위한 데이터 중심 가속기 기반 컴퓨팅 시스템 구조 설계.**<br />
-한국연구재단. *2018.09. - 2020.12.*
-### Education
+**Languages** C, Java, Python<br />
+**Frameworks** Spring, OpenCL, Pytorch, TensorFlow
 
-세종대학교 일반대학원 컴퓨터공학과 석사과정. *2019.03. - 2021.02.*<br />
-학위 논문: 다중 엣지 장치 기반 딥러닝 분산처리 기법
+# Experiences
 
-세종대학교 컴퓨터공학과. *2012.03. - 2019.02.*
+## CJ OliveNetworks
 
-### Skills
+**Period** 2021.01. ~ present<br />
+**Position** System Engineer<br />
+**Projects** 
 
-Languages: C. Java. Python.<br />
-Frameworks: Spring. OpenCL. TensorFlow. PyTorch.
+# Education
 
-### Publications
+## 대학원: 세종대학교 컴퓨터공학과 석사과정
 
-#### Papers
+**Period** 2019.03. - 2021.02.<br />
+**Thesis** 다중 엣지 장치 기반 딥러닝 분산처리 기법<br />
+**Advisor** 박기호 (Gi-ho Park)
 
-<a href="https://doi.org/10.5626/JOK.2020.47.8.787" target='_blank'>복수의 엣지 디바이스에서의 CNN 모델 분산 처리를 위한 축소된 분류 모델 활용 기법.</a><br />
+### 차세대 응용을 위한 데이터 중심 가속기 기반 컴퓨팅 시스템 구조 설계
+
+**Period** 2018.03. - 2021.02. (**Attend** 2018.09. - 2020.12.)<br />
+**Sponsor** 과학기술정보통신부 - 한국연구재단
+
+#### Description
+
+### 캠퍼스 특허전략 유니버시아드
+
+**Period** 2019.04. - 2019.08.<br />
+**Subject** 특허전략 수립부문: 인공지능 메모리 시장 진입을 위한 특허전략
+**Award** 특허청장상 <https://www.kipa.org/cpu/4_u2019.jsp>
+
+#### Description
+
+## 대학교: 세종대학교 컴퓨터공학과
+
+**Period** 2012.03. - 2019.02.<br />
+
+### 캠퍼스 특허전략 유니버시아드
+
+**Period** 2018.04. - 2018.08.
+**Subject** 특허전략 수립부문: 인공지능칩 시장 진입을 위한 특허전략 수립
+**Award** 한국공학한림원 회장상 <https://www.kipa.org/cpu/4_u2018.jsp>
+
+#### Description
+
+# Publications
+
+## Papers
+
+### 복수의 엣지 디바이스에서의 CNN 모델 분산 처리를 위한 축소된 분류 모델 활용 기법
+
+<https://doi.org/10.5626/JOK.2020.47.8.787><br />
 정보과학회논문지. 제47권. 제8호. 2020.08. 787-792.<br />
 김준영. 전종호. 기민관. 박기호.
 
-<a href="http://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE08763159" target='_blank'>복수의 엣지 디바이스에서의 CNN 모델 분산 처리를 위한 축소된 분류 모델 활용에 대한 분석.</a><br />
+### 복수의 엣지 디바이스에서의 CNN 모델 분산 처리를 위한 축소된 분류 모델 활용에 대한 분석
+
+<http://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE08763159><br />
 한국정보과학회 2019 한국컴퓨터종합학술대회 논문집. 2019.06. 290-292.<br />
 김준영. 전종호. 기민관. 박기호.
 
-<a href="http://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE07614068" target='_blank'>엣지 디바이스에서의 효율적인 딥러닝 응용 수행을 위한 성능 분석.</a><br />
+**Award** 최우수 논문상: 2019 한국컴퓨터종합학술대회 사물 인터넷 부문
+
+### 엣지 디바이스에서의 효율적인 딥러닝 응용 수행을 위한 성능 분석
+
+<http://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE07614068><br />
 한국정보과학회 2018 한국소프트웨어종합학술대회 논문집. 2018.12. 1713-1715.<br />
 김준영. 한치원. 기민관. 박기호.
 
-#### Patents
+## Patents
 
-**분산된 분류 모델을 이용하는 분류 방법.**<br />
-<a href="https://doi.org/10.8080/1020200076297" target='_blank'>KR 10-2021-0000674 A.</a> 2021.01.05.<br />
-<a href="https://patentscope.wipo.int/search/ko/detail.jsf?docId=WO2020262932" target='_blank'>WO 2020 262932 A1.</a> 2020.12.30.<br />
+### 분산된 분류 모델을 이용하는 분류 방법
+
+<https://doi.org/10.8080/1020200076297><br />
+대한민국 출원 특허 10-2020-0076297. 2020.06.23.<br />
 박기호. 김준영. 전종호. 기민관.
-
-### Awards
-
-<a href="https://www.kipa.org/cpu/4_u2019.jsp" target='_blank'>특허청장상 - A11: 인공지능 메모리 시장 진입을 위한 특허전략.</a><br />
-캠퍼스 특허전략 유니버시아드. 특허청. 2019.11.21.<br />
-기민관. 한치원. 김준영.
-
-<a href="http://kiise.or.kr/conference/kcc/2019/" target='_blank'>최우수논문상 - 복수의 엣지 디바이스에서의 CNN 모델 분산 처리를 위한 축소된 분류 모델 활용에 대한 분석.</a><br />
-2019 한국컴퓨터종합학술대회. 한국정보과학회. 2019.06.27.<br />
-김준영. 전종호. 기민관. 박기호.
-
-<a href="https://www.kipa.org/cpu/4_u2018.jsp" target='_blank'>한국공학한림원회장상 - A11: 인공지능칩 시장 진입을 위한 특허전략 수립.</a><br />
-캠퍼스 특허전략 유니버시아드. 특허청. 2018.11.21.<br />
-기민관. 한치원. 김준영.

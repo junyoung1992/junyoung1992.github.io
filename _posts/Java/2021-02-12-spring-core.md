@@ -528,7 +528,102 @@ public class OrderServiceImpl implements OrderService{
 
 ### 새로운 할인 정책 개발
 
+할인 정책 수정
+- 할인률을 10%로 지정
+
+**RateDiscountPolicy**
+![SPRING#0010](/assets/images/spring-core/0010-rate-discount-policy.png)
+
+```java
+public class RateDiscountPolicy implements DiscountPolicy{
+    private int discountPercent = 10;
+
+    @Override
+    public int discount(Member member, int price) {
+        if (member.getGrade() == Grade.VIP) {
+            return price * discountPercent / 100;
+        } else {
+            return 0;
+        }
+    }
+}
+```
+
+**RateDiscountPolicy 테스트**
+```java
+class RateDiscountPolicyTest {
+    RateDiscountPolicy discountPolicy = new RateDiscountPolicy();
+
+    @Test
+    @DisplayName("VIP는 10% 할인이 적용되어야 한다")
+    void vip_o() {
+        // Given
+        Member member = new Member(1L, "memberVIP", Grade.VIP);
+
+        // When
+        int discount = discountPolicy.discount(member, 10000);
+
+        // Then
+        assertThat(discount).isEqualTo(1000);
+    }
+
+    @Test
+    @DisplayName("VIP가 아니면 할인이 적용되지 않아야 한다")
+    void vip_x() {
+        // Given
+        Member member = new Member(2L, "memberVIP", Grade.BASIC);
+
+        // When
+        int discount = discountPolicy.discount(member, 10000);
+
+        // Then
+        assertThat(discount).isEqualTo(1000);
+    }
+}
+```
+
 ### 새로운 할인 정책 적용과 문제점
+
+새로운 할인 정책을 적용하려면 클라이언트인 `OrderServiceImpl`을 수정해야 함
+```java
+public class OrderServiceImpl implements OrderService{
+    private final MemberRepository memberRepository = new MemoryMemberRepository();
+    // private final DiscountPolicy discountPolicy = new FixDiscountPolicy();
+    private final DiscountPolicy discountPolicy = new RateDiscountPolicy();
+
+    @Override
+    public Order createOrder(Long memberId, String itemName, int itemPrice) {
+        Member member = memberRepository.findById(memberId);
+        int discountPrice = discountPolicy.discount(member, itemPrice);
+
+        return new Order(memberId, itemName, itemPrice, discountPrice);
+    }
+}
+```
+- 객체지향 설계 원칙인 OCP, DIP 위반
+    - 추상 인터페이스 뿐만 아니라 구현 클래스도 의존하고 있으므로 DIP 위반
+    - 기능을 확장하면 클라이언트 코드에 영향을 주므로 OCP 위반
+
+인터페이스에만 의존하도록 코드 변경
+```java
+public class OrderServiceImpl implements OrderService{
+    private final MemberRepository memberRepository = new MemoryMemberRepository();
+    // private final DiscountPolicy discountPolicy = new FixDiscountPolicy();
+    // private final DiscountPolicy discountPolicy = new RateDiscountPolicy();
+    private DiscountPolicy discountPolicy;
+
+    @Override
+    public Order createOrder(Long memberId, String itemName, int itemPrice) {
+        Member member = memberRepository.findById(memberId);
+        int discountPrice = discountPolicy.discount(member, itemPrice);
+
+        return new Order(memberId, itemName, itemPrice, discountPrice);
+    }
+}
+```
+- 지금은 구현체가 할당되지 않아 코드가 실행되지 않음
+    - NPE(Null Pointer Error) 발생
+- 이 문제를 해결하려면 누군가가 클라이언트인 OrderServiceImple에 DiscountPolicy의 구현 객체를 대신 생성하고 주입해야 함
 
 ### 관심사의 분리
 
