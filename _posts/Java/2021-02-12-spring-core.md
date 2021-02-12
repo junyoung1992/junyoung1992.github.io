@@ -191,19 +191,338 @@ Dependency Inversion Principle
 
 ### 프로젝트 생성
 
+스프링 부트를 사용하여 프로젝트 생성<br />
+<https://start.spring.io>
+
+![SPRING#0001](/assets/images/spring-core/0001-project-setting.png)
+
 ### 비즈니스 요구사항과 설계
+
+회원 요구사항
+- 회원 가입과 조회가 가능
+- 회원의 등급은 일반과 VIP가 존재
+- 회원 데이터는 자체 DB를 구축할 수 있고, 외부 시스템과 연동할 수 있음(미확정)
+
+주문과 할인 정책
+- 회원은 상품을 주문할 수 있음
+- 회원 등급에 따라 할인 정책을 적용할 수 있음
+    - 모든 VIP는 1,000원 할인(추후 변경 가능)
+- 할인 정책은 변경 가능성이 높음
+    - 회사의 기본 할인 정책은 정해지지 않음
 
 ### 회원 도메인 설계
 
+회원 도메인 요구사항
+- 회원 가입 및 조회
+- 회원은 일반과 VIP 두 가지 등급이 있음
+- 회원 데이터는 자체 DB를 구축할 수 있고, 외부 시스템과 연동할 수 있음
+
+**회원 도메인 협력 관계**
+![SPRING#0002](/assets/images/spring-core/0002-member-domain.png)
+
+**회원 클래스 다이어그램**
+![SPRING#0003](/assets/images/spring-core/0003-member-class.png)
+
+**회원 객체 다이어그램**
+![SPRING#0004](/assets/images/spring-core/0004-member-object.png)
+- 회원 서비스: **MemberServicempl**
+
 ### 회원 도메인 개발
+
+회원 엔티티
+- 회원 등급
+    ```java
+    public enum Grade {
+        BASIC,
+        VIP
+    }
+    ```
+- 회원 엔티티
+    ```java
+    public class Member {
+        private Long id;
+        private String name;
+        private Grade grade;
+    
+        public Member(Long id, String name, Grade grade) {
+            this.id = id;
+            this.name = name;
+            this.grade = grade;
+        }
+    
+        public Long getId() {
+            return id;
+        }
+    
+        public void setId(Long id) {
+            this.id = id;
+        }
+    
+        public String getName() {
+            return name;
+        }
+    
+        public void setName(String name) {
+            this.name = name;
+        }
+    
+        public Grade getGrade() {
+            return grade;
+        }
+    
+        public void setGrade(Grade grade) {
+            this.grade = grade;
+        }
+    }
+    ```
+
+회원 저장소
+- 회원 저장소 인터페이스
+    ```java
+    public interface MemberRepository {
+        void save(Member member);
+        Member findById(Long memberId);
+    }
+    ```
+- 회원 저장소 구현체(메모리)
+    ```java
+    public class MemoryMemberRepository implements MemberRepository{
+        private  static Map<Long, Member> store = new HashMap<>();
+    
+        @Override
+        public void save(Member member) {
+            store.put(member.getId(), member);
+        }
+    
+        @Override
+        public Member findById(Long memberId) {
+            return store.get(memberId);
+        }
+    }
+    ```
+    - `HashMap`은 동시성 이슈가 발생할 수 있으므로, `ConcurrentHashMap`을 사용
+        - 교육이므로 그냥 `HashMap` 사용
+
+회원 서비스
+- 회원 서비스 인터페이스
+    ```java
+    public interface MemberService {
+        void join(Member member);
+        Member findMember(Long memberId);
+    }
+    ```
+- 회원 서비스 구현체
+    ```java
+    public class MemberServiceImpl implements MemberService{
+        private final MemberRepository memberRepository = new MemoryMemberRepository();
+    
+        @Override
+        public void join(Member member) {
+            memberRepository.save(member);
+        }
+    
+        @Override
+        public Member findMember(Long memberId) {
+            return memberRepository.findById(memberId);
+        }
+    }
+    ```
 
 ### 회원 도메인 실행과 테스트
 
+회원 도메인
+- 회원 가입 실행
+    ```java
+    public class MemberApp {
+        public static void main(String[] args) {
+            MemberService memberService = new MemberServiceImpl();
+            Member member = new Member(1L, "memberA", Grade.VIP);
+            memberService.join(member);
+    
+            Member findMember = memberService.findMember(1L);
+            System.out.println("new member = " + member.getName());
+            System.out.println("find member = " + findMember.getName());
+        }
+    }
+    ```
+    - 애플리케이션 로직으로 테스트를 하는 것은 좋은 방법이 아님 -> JUnit 테스트 활용
+- 회원 가입 테스트
+    ```java
+    public class MemberServiceTest {
+        MemberService memberService = new MemberServiceImpl();
+    
+        @Test
+        void join() {
+            // Given
+            Member member = new Member(1L, "memberA", Grade.VIP);
+    
+            // When
+            memberService.join(member);
+            Member findMember = memberService.findMember(1L);
+    
+            // Then
+            Assertions.assertThat(member).isEqualTo(findMember);
+        }
+    }
+    ```
+    - 테스트를 위해 `src\test`에 따로 분리된 디렉토리가 있음
+    - 배포에는 포함되지 않는 코드
+
+회원 도메인 설계의 문제점
+- OCP, DIP 원칙을 잘 준수하고 있는가?
+- 인터페이스 뿐만 아니라 구현까지 의존하는 형태로 의존관계가 구현됨
+
 ### 주문과 할인 도메인 설계
+
+주문과 할인 정책
+- 회원은 상품을 주문할 수 있음
+- 회원 등급에 따라 할인 정책을 적용할 수 있음
+- 모든 VIP는 1000원을 할인해주는 고정 금액 할인이 적용(추후 변경 가능)
+- 할인 정책은 변경 가능성이 높음
+
+**주문 도메인 협력, 역할 책임**
+![SPRING#0005](/assets/images/spring-core/0005-order-domain.png)
+1. 주문 생성: 클라이언트는 주문 서비스에 주문 생성을 요청
+1. 회원 조회: 할인을 위해 주문 서비스는 회원 저장소에서 회원을 조회
+1. 할인 적용: 주문 서비스는 회원 등급에 따른 할인 여부를 할인 정책에 위임
+1. 주문 결과 반환: 주문 서비스는 할인 결과를 포함한 주문 결과를 반환
+    - DB에 저장하면 예제가 복잡해지므로 그냥 반환
+
+**주문 도메인 전체**
+![SPRING#0006](/assets/images/spring-core/0006-order-domain-all.png)
+- 역할과 구현을 분리해서 자유롭게 객체를 조힙할 수 있도록 설계
+
+**주문 도메인 클래스 다이어그램**
+![SPRING#0007](/assets/images/spring-core/0007-order-class.png)
+
+**주문 도메인 객체 다이어그램**
+![SPRING#0008](/assets/images/spring-core/0008-order-object-1.png)
+![SPRING#0009](/assets/images/spring-core/0009-order-object-2.png)
 
 ### 주문과 할인 도메인 개발
 
+할인 정책 인터페이스
+```java
+public interface DiscountPolicy {
+    /**
+     * @return 할인 대상 금액
+     */
+    int discount(Member member, int price);
+}
+```
+
+정액 할인 정책 구현체
+```java
+public class FixDiscountPolicy implements DiscountPolicy{
+    private int discountFixAmout = 1000;
+    @Override
+    public int discount(Member member, int price) {
+        if (member.getGrade() == Grade.VIP) {
+            return discountFixAmout;
+        } else {
+            return 0;
+        }
+    }
+}
+```
+
+주문 엔티티
+```java
+public class Order {
+    private Long memberId;
+    private String itemName;
+    private int itemPrice;
+    private int discountPrice;
+
+    public Order(Long memberId, String itemName, int itemPrice, int discountPrice) {
+        this.memberId = memberId;
+        this.itemName = itemName;
+        this.itemPrice = itemPrice;
+        this.discountPrice = discountPrice;
+    }
+
+    ... (getter and setter)
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "memberId=" + memberId +
+                ", itemName='" + itemName + '\'' +
+                ", itemPrice=" + itemPrice +
+                ", discountPrice=" + discountPrice +
+                '}';
+    }
+}
+```
+
+주문 서비스 인터페이스
+```java
+public interface OrderService {
+    Order createOrder(Long memberId, String itemName, int itemPrice);
+}
+```
+
+주문 서비스 구현체
+```java
+public class OrderServiceImpl implements OrderService{
+    private final MemberRepository memberRepository = new MemoryMemberRepository();
+    private final DiscountPolicy discountPolicy = new FixDiscountPolicy();
+
+    @Override
+    public Order createOrder(Long memberId, String itemName, int itemPrice) {
+        Member member = memberRepository.findById(memberId);
+        int discountPrice = discountPolicy.discount(member, itemPrice);
+
+        return new Order(memberId, itemName, itemPrice, discountPrice);
+    }
+}
+```
+- 주문 생성 요청이 들어오면 회원 정보를 조회하고 할인 정책을 적용한 다음 주문 객체를 생성하여 반환
+    - `MemoryMemberRepository`와 `FixDiscountPolicy`를 구현체로 생성
+
 ### 주문과 할인 도메인 실행과 테스트
+
+주문과 할인 정책
+- 주문과 할인 정책 실행
+    ```java
+    public class OrderApp {
+        public static void main(String[] args) {
+            MemberService memberService = new MemberServiceImpl();
+            OrderService orderService = new OrderServiceImpl();
+    
+            Long memberId = 1L;
+            Member member = new Member(memberId, "memberA", Grade.VIP);
+            memberService.join(member);
+    
+            Order order = orderService.createOrder(memberId, "itemA", 10000);
+    
+            System.out.println("order = " + order);
+            System.out.println("order.calculatePrice = " + order.calculatePrice());
+        }
+    }
+    ```
+    - 애플리케이션 로직으로 테스트하는 것은 좋은 방법이 아님
+- 주문과 할인 정책 테스트
+    ```java
+    public class OrderServiceTest {
+        MemberService memberService = new MemberServiceImpl();
+        OrderService orderService = new OrderServiceImpl();
+    
+        @Test
+        void createOrder() {
+            // Given
+            Long memberId = 1L;
+            Member member= new Member(memberId, "memberA", Grade.VIP);
+    
+            // When
+            memberService.join(member);
+            Order order = orderService.createOrder(memberId, "itemA", 10000);
+    
+            // Then
+            Assertions.assertThat(order.getDiscountPrice()).isEqualTo(1000);
+        }
+    }
+    ```
 
 ## 3. 스프링 핵심 원리 이해 2 - 객체 지향 원리 이용
 
