@@ -9,7 +9,7 @@ show_title: false
 <div style="text-align: right"><i>Last Updated: 2021.02.13.</i></div>
 
 여러가지 공부하는 것을 좋아하는, 그냥 **프로그래머** 입니다.<br />
-*Machine Learning, Computer Architecture, IoT, Cloud, etc.*
+*Machine Learning, Computer Architecture, IoT, Cloud, Webn, etc.*
 
 **GitHub** <https://github.com/junyoung1992><br />
 **Contact** <orsay0827@gmail.com>
@@ -18,7 +18,7 @@ show_title: false
 
 ## CJ OliveNetworks
 
-**Period** 2021.01. ~ present<br />
+**Period** 2021.01. - present<br />
 **Position** System Engineer<br />
 **Projects** 
 
@@ -40,6 +40,7 @@ show_title: false
 ### 캠퍼스 특허전략 유니버시아드
 
 **Period** 2019.04. - 2019.08.<br />
+**Sponsor** 특허청<br />
 **Subject** 특허전략 수립부문: 인공지능 메모리 시장 진입을 위한 특허전략<br />
 **Award** 특허청장상 <https://www.kipa.org/cpu/4_u2019.jsp>
 
@@ -52,6 +53,7 @@ show_title: false
 ### 캠퍼스 특허전략 유니버시아드
 
 **Period** 2018.04. - 2018.08.<br />
+**Sponsor** 특허청<br />
 **Subject** 특허전략 수립부문: 인공지능칩 시장 진입을 위한 특허전략 수립<br />
 **Award** 한국공학한림원 회장상 <https://www.kipa.org/cpu/4_u2018.jsp>
 
@@ -63,24 +65,24 @@ show_title: false
 
 ### 복수의 엣지 디바이스에서의 CNN 모델 분산 처리를 위한 축소된 분류 모델 활용 기법
 
-정보과학회논문지. 제47권. 제8호. 2020.08. 787-792.<br />
-김준영. 전종호. 기민관. 박기호.
+**Journal** 정보과학회논문지. 제47권. 제8호. 2020.08. 787-792.<br />
+**Author** 김준영. 전종호. 기민관. 박기호.
 
 ### 복수의 엣지 디바이스에서의 CNN 모델 분산 처리를 위한 축소된 분류 모델 활용에 대한 분석
 
-한국정보과학회 2019 한국컴퓨터종합학술대회 논문집. 2019.06. 290-292.<br />
-김준영. 전종호. 기민관. 박기호.
+**Conference** 한국정보과학회 2019 한국컴퓨터종합학술대회 논문집. 2019.06. 290-292.<br />
+**Author** 김준영. 전종호. 기민관. 박기호.
 
 **Award** 최우수논문상 <http://kiise.or.kr/conference/kcc/2019/>
 
 ### 엣지 디바이스에서의 효율적인 딥러닝 응용 수행을 위한 성능 분석
 
-한국정보과학회 2018 한국소프트웨어종합학술대회 논문집. 2018.12. 1713-1715.<br />
-김준영. 한치원. 기민관. 박기호.
+**Conference** 한국정보과학회 2018 한국소프트웨어종합학술대회 논문집. 2018.12. 1713-1715.<br />
+**Author** 김준영. 한치원. 기민관. 박기호.
 
 ## Patents
 
 ### 분산된 분류 모델을 이용하는 분류 방법
 
-대한민국 출원 특허 10-2020-0076297. 2020.06.23.<br />
-박기호. 김준영. 전종호. 기민관.
+**Patent Number** 대한민국 출원 특허 10-2020-0076297. 2020.06.23.<br />
+**Inventer** 박기호. 김준영. 전종호. 기민관.
