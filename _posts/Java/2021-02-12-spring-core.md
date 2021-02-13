@@ -673,14 +673,14 @@ public class MemberServiceImpl implements MemberService{
 - 의존 관계는 외부(AppConfig)에서 결정
 
 클래스 다이어그램<br />
-![SPRING#0011](/assets/images/0011-appconfig-class.png)
+![SPRING#0011](/assets/images/spring-core/0011-appconfig-class.png)
 - 객체의 생성과 연결은 `AppConfig`가 담당
 - DIP의 완성: `MemberServiceImpl`은 `MemberRepository`에만 의존하면 됨
     - 구체 클래스에 대해서는 몰라도 됨
 - 관심사의 분리 -> 객체를 생성하고 연결하는 역할과 실행하는 역할이 명확히 분리됨
 
 회원 객체 인스턴스 다이어그램<br />
-![#SPRING#0012](/assets/images/0012-member-object-instance.png)
+![#SPRING#0012](/assets/images/spring-core/0012-member-object-instance.png)
 - `appConfig` 객체는 `memoryMemberRepository` 객체를 생성하고 그 참조값을 `memberServiceImpl`에 생성, 주입
 - 클라이언트인 `memberServiceImpl` 입장에서 보면 의존관계를 마치 외부에서 주입해주는 것 같다고 해서 DI(Dependency Injection)이라고 함
 
@@ -811,7 +811,7 @@ public class OrderServiceTest {
 ### AppConfig 리팩터링
 
 기대하는 형태<br />
-![SPRING#0013](/assets/images/0013-appconfig-hope.png)
+![SPRING#0013](/assets/images/spring-core/0013-appconfig-hope.png)
 
 ```java
 public class AppConfig {
@@ -842,10 +842,10 @@ public class AppConfig {
 - `FixDiscountPolicy` -> `RateDiscountPolicy`
 
 사용, 구성의 분리<br />
-![SPRING#0014](/assets/images/0014-revise-discount-policy-1.png)
+![SPRING#0014](/assets/images/spring-core/0014-revise-discount-policy-1.png)
 
 할인 정책 변경<br />
-![SPRING#0014](/assets/images/0015-revise-discount-policy-2.png)
+![SPRING#0014](/assets/images/spring-core/0015-revise-discount-policy-2.png)
 
 ```java
 public class AppConfig {
@@ -943,12 +943,12 @@ public class AppConfig {
 - 클래스가 사용하는 import 코드만 보고 의존관계를 쉽계 판단할 수 있음
 - 정적인 의존관계는 애플리케이션을 실행하지 않아도 분석할 수 있음
 
-![SPRING#0016](/assets/images/0016-dependency-static.png)
+![SPRING#0016](/assets/images/spring-core/0016-dependency-static.png)
 
 동적인 객체 인스턴스 의존관계
 - 애플리케이션 실행 시점에 실제 생성된 객체 인스턴스의 참조가 연결된 의존관계
 
-![SPRING#0017](/assets/images/0017-dependency-dynamic.png)
+![SPRING#0017](/assets/images/spring-core/0017-dependency-dynamic.png)
 - 의존관계 주입: 애플리케이션 실행 시점(런타임)에 외부에서 실제 구현 객체를 생성하고 클라이언트에 전달해서 클라이언트와 서버의 실제 의존관계가 연결되는 것
     - 객체 인스턴스를 생성하고, 그 찹조값을 전달해서 연결
 - 의존관계 주입을 통해 클라이언트 코드를 변경하지 않고, 클라이언트가 호출하는 대상의 타입 인스턴스 변경 가능
