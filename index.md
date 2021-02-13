@@ -35,16 +35,13 @@ show_title: false
 **Period** 2018.09. - 2020.12. *(2018.03. - 2021.02.)*<br />
 **Sponsor** 과학기술정보통신부 / 한국연구재단
 
-#### Description
-
 ### 캠퍼스 특허전략 유니버시아드
 
 **Period** 2019.04. - 2019.08.<br />
-**Sponsor** 특허청<br />
+**Host** 특허청
+
 **Subject** 특허전략 수립부문: 인공지능 메모리 시장 진입을 위한 특허전략<br />
 **Award** 특허청장상 <https://www.kipa.org/cpu/4_u2019.jsp>
-
-#### Description
 
 ## 세종대학교 컴퓨터공학과
 
@@ -53,11 +50,10 @@ show_title: false
 ### 캠퍼스 특허전략 유니버시아드
 
 **Period** 2018.04. - 2018.08.<br />
-**Sponsor** 특허청<br />
+**Host** 특허청
+
 **Subject** 특허전략 수립부문: 인공지능칩 시장 진입을 위한 특허전략 수립<br />
 **Award** 한국공학한림원 회장상 <https://www.kipa.org/cpu/4_u2018.jsp>
-
-#### Description
 
 # Publications
 
