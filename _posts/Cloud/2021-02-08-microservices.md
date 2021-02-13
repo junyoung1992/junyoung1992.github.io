@@ -1,6 +1,6 @@
 ---
 title: "What is Microservices?"
-tags: Microservices MSA
+tags: Microservices MSA CJ
 ---
 
 ## 1. Microservices 소개

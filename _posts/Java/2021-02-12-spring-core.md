@@ -380,7 +380,7 @@ Dependency Inversion Principle
 - 모든 VIP는 1000원을 할인해주는 고정 금액 할인이 적용(추후 변경 가능)
 - 할인 정책은 변경 가능성이 높음
 
-**주문 도메인 협력, 역할 책임**
+**주문 도메인 협력, 역할 책임**<br />
 ![SPRING#0005](/assets/images/spring-core/0005-order-domain.png)
 1. 주문 생성: 클라이언트는 주문 서비스에 주문 생성을 요청
 1. 회원 조회: 할인을 위해 주문 서비스는 회원 저장소에서 회원을 조회
@@ -388,14 +388,14 @@ Dependency Inversion Principle
 1. 주문 결과 반환: 주문 서비스는 할인 결과를 포함한 주문 결과를 반환
     - DB에 저장하면 예제가 복잡해지므로 그냥 반환
 
-**주문 도메인 전체**
+**주문 도메인 전체**<br />
 ![SPRING#0006](/assets/images/spring-core/0006-order-domain-all.png)
 - 역할과 구현을 분리해서 자유롭게 객체를 조힙할 수 있도록 설계
 
-**주문 도메인 클래스 다이어그램**
+**주문 도메인 클래스 다이어그램**<br />
 ![SPRING#0007](/assets/images/spring-core/0007-order-class.png)
 
-**주문 도메인 객체 다이어그램**
+**주문 도메인 객체 다이어그램**<br />
 ![SPRING#0008](/assets/images/spring-core/0008-order-object-1.png)
 ![SPRING#0009](/assets/images/spring-core/0009-order-object-2.png)
 
@@ -531,7 +531,7 @@ public class OrderServiceImpl implements OrderService{
 할인 정책 수정
 - 할인률을 10%로 지정
 
-**RateDiscountPolicy**
+**RateDiscountPolicy**<br />
 ![SPRING#0010](/assets/images/spring-core/0010-rate-discount-policy.png)
 
 ```java
@@ -549,7 +549,7 @@ public class RateDiscountPolicy implements DiscountPolicy{
 }
 ```
 
-**RateDiscountPolicy 테스트**
+**RateDiscountPolicy 테스트**<br />
 ```java
 class RateDiscountPolicyTest {
     RateDiscountPolicy discountPolicy = new RateDiscountPolicy();
@@ -627,17 +627,428 @@ public class OrderServiceImpl implements OrderService{
 
 ### 관심사의 분리
 
+AppConfig의 등장
+- 애플리케이션의 전체 동작 방식을 구성
+- 구현 객체를 생성하고 연결하는 책임을 갖는 별도의 설정 클래스
+```java
+public class AppConfig {
+
+    public MemberService memberService() {
+        return new MemberServiceImpl(new MemoryMemberRepository());
+    }
+
+    public OrderService orderService() {
+        return new OrderServiceImpl(new MemoryMemberRepository(), new FixDiscountPolicy());
+    }
+
+}
+```
+- AppConfig는 애플리케이션의 실제 동작에 필요한 구현 객체를 생성
+- AppConfig는 생성된 객체 인스턴스의 참조를 생성자를 통해 주입
+
+생성자 주입: MemberServiceImpl
+```java
+public class MemberServiceImpl implements MemberService{
+
+    private final MemberRepository memberRepository;
+
+    public MemberServiceImpl(MemberRepository memberRepository) {
+        this.memberRepository = memberRepository;
+    }
+
+    @Override
+    public void join(Member member) {
+        memberRepository.save(member);
+    }
+
+    @Override
+    public Member findMember(Long memberId) {
+        return memberRepository.findById(memberId);
+    }
+
+}
+```
+- 설계 변경을 통해 더이상 구현 객체인 MemoryMemberRepository에 의존하지 않음
+    - MemberRepository 인터페이스에만 의존
+- 의존 관계는 외부(AppConfig)에서 결정
+
+클래스 다이어그램<br />
+![SPRING#0011](/assets/images/0011-appconfig-class.png)
+- 객체의 생성과 연결은 `AppConfig`가 담당
+- DIP의 완성: `MemberServiceImpl`은 `MemberRepository`에만 의존하면 됨
+    - 구체 클래스에 대해서는 몰라도 됨
+- 관심사의 분리 -> 객체를 생성하고 연결하는 역할과 실행하는 역할이 명확히 분리됨
+
+회원 객체 인스턴스 다이어그램<br />
+![#SPRING#0012](/assets/images/0012-member-object-instance.png)
+- `appConfig` 객체는 `memoryMemberRepository` 객체를 생성하고 그 참조값을 `memberServiceImpl`에 생성, 주입
+- 클라이언트인 `memberServiceImpl` 입장에서 보면 의존관계를 마치 외부에서 주입해주는 것 같다고 해서 DI(Dependency Injection)이라고 함
+
+생성자 주입: OrderServiceImpl
+```java
+public class OrderServiceImpl implements OrderService{
+
+    private final MemberRepository memberRepository;
+    private final DiscountPolicy discountPolicy;
+
+    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+        this.memberRepository = memberRepository;
+        this.discountPolicy = discountPolicy;
+    }
+
+    @Override
+    public Order createOrder(Long memberId, String itemName, int itemPrice) {
+        Member member = memberRepository.findById(memberId);
+        int discountPrice = discountPolicy.discount(member, itemPrice);
+
+        return new Order(memberId, itemName, itemPrice, discountPrice);
+    }
+
+}
+```
+
+연계된 다른 클래스 수정
+```java
+public class MemberApp {
+    public static void main(String[] args) {
+
+        AppConfig appConfig = new AppConfig();
+        MemberService memberService = appConfig.memberService();
+        Member member = new Member(1L, "memberA", Grade.VIP);
+        memberService.join(member);
+
+        Member findMember = memberService.findMember(1L);
+        System.out.println("new member = " + member.getName());
+        System.out.println("find member = " + findMember.getName());
+    }
+
+}
+```
+
+```java
+public class OrderApp {
+    
+    public static void main(String[] args) {
+        AppConfig appConfig = new AppConfig();
+        MemberService memberService = appConfig.memberService();
+        OrderService orderService = appConfig.orderService();
+
+        Long memberId = 1L;
+        Member member = new Member(memberId, "memberA", Grade.VIP);
+        memberService.join(member);
+
+        Order order = orderService.createOrder(memberId, "itemA", 10000);
+
+        System.out.println("order = " + order);
+        System.out.println("order.calculatePrice = " + order.calculatePrice());
+    }
+    
+}
+```
+
+```java
+public class MemberServiceTest {
+
+    MemberService memberService;
+
+    @BeforeEach
+    public void beforeEach(){
+        AppConfig appConfig = new AppConfig();
+        memberService = appConfig.memberService();
+    }
+
+    @Test
+    void join() {
+        // Given
+        Member member = new Member(1L, "memberA", Grade.VIP);
+
+        // When
+        memberService.join(member);
+        Member findMember = memberService.findMember(1L);
+
+        // Then
+        Assertions.assertThat(member).isEqualTo(findMember);
+    }
+
+}
+```
+
+```java
+public class OrderServiceTest {
+
+    MemberService memberService;
+    OrderService orderService;
+
+    @BeforeEach
+    public void beforeEach() {
+        AppConfig appConfig = new AppConfig();
+        memberService = appConfig.memberService();
+        orderService = appConfig.orderService();
+    }
+
+    @Test
+    void createOrder() {
+        // Given
+        Long memberId = 1L;
+        Member member= new Member(memberId, "memberA", Grade.VIP);
+
+        // When
+        memberService.join(member);
+        Order order = orderService.createOrder(memberId, "itemA", 10000);
+
+        // Then
+        Assertions.assertThat(order.getDiscountPrice()).isEqualTo(1000);
+    }
+
+}
+```
+
+정리
+- `AppConfig`를 통해 관심사를 명확하게 분리
+- `AppConfig`는 구체 클래스를 선택 - 애플리케이션이 동작하는 전체 구성을 책임짐
+- `MemberServiceImpl`과 `OrderServiceImpl`은 기능의 실행을 책임짐
+
 ### AppConfig 리팩터링
+
+기대하는 형태<br />
+![SPRING#0013](/assets/images/0013-appconfig-hope.png)
+
+```java
+public class AppConfig {
+
+    public MemberService memberService() {
+        return new MemberServiceImpl(memberRepository());
+    }
+
+    public MemberRepository memberRepository() {
+        return new MemoryMemberRepository();
+    }
+
+    public OrderService orderService() {
+        return new OrderServiceImpl(memberRepository(), discountPolicy());
+    }
+
+    public DiscountPolicy discountPolicy() {
+        return new FixDiscountPolicy();
+    }
+
+}
+```
+- 중복을 제거하고 역할에 따른 구현이 보이도록 리팩터링
 
 ### 새로운 구조와 할인 정책 적용
 
+정액 할인 정책을 정률 할인 정책으로 변경
+- `FixDiscountPolicy` -> `RateDiscountPolicy`
+
+사용, 구성의 분리<br />
+![SPRING#0014](/assets/images/0014-revise-discount-policy-1.png)
+
+할인 정책 변경<br />
+![SPRING#0014](/assets/images/0015-revise-discount-policy-2.png)
+
+```java
+public class AppConfig {
+
+    public MemberService memberService() {
+        return new MemberServiceImpl(memberRepository());
+    }
+
+    public MemberRepository memberRepository() {
+        return new MemoryMemberRepository();
+    }
+
+    public OrderService orderService() {
+        return new OrderServiceImpl(memberRepository(), discountPolicy());
+    }
+
+    public DiscountPolicy discountPolicy() {
+        // return new FixDiscountPolicy();
+        return new RateDiscountPolicy();
+    }
+
+}
+```
+- `AppConfig`에서 할인 정책 역할을 담당하는 구현을 `FixDiscountPolicy`에서 `RateDiscountPolicy` 객체로 변경
+- 할인 정책을 변경해도, 애플리케이션의 구성 역할을 담당하는 `AppConfig`만 변경하면 됨
+    - 클라이언트 코드는 수정할 필요 없음
+
 ### 전체 흐름 정리
+
+**새로운 할인 정책 개발**<br />
+다형성 덕분에 새로운 정률 할인 정책 코드를 추가로 개발하는 것 자체는 문제 없음
+
+**새로운 할인 정책의 적용과 문제점**<br />
+새로 개발한 정률 할인 정책을 적용하려면 클라이언트 코드인 주문 서비스 구현체도 함께 수정해야 함<br />
+주문 서비스 클라이언트가 인터페이스인 `DiscountPolicy` 뿐만 아니라, 구체 클래스인 `FixDiscountPolicy`도 함께 의존<br />
+-> DIP 위반
+
+**관심사의 분리**<br />
+- 기존에는 클라이언트가 의존하는 서버 구현 객체를 직접 생성하고 실행
+- `AppConfig`의 등장
+- `AppConfig`는 애플리케이션의 전체 동작 방식을 구성하기 위해, 구현 객체를 생성하고 연결하는 역할을 함
+- 이제 클라이언트 객체는 자신의 역할을 실행하는 것에만 집중 -> 책임이 명확해짐
+
+**AppConfig** 리팩터링<br />
+- 구성 정보에서 역할과 구현을 명확하게 분리
+- 중복 제거
+
+**새로운 구조와 할인 정책 적용**
 
 ### 좋은 객체 지향 설계의 5가지 원칙의 적용
 
+여기서는 SRP, DIP, OCP 적용
+
+**SRP 단일 책임 원칙**<br />
+한 클래스는 하나의 책임만 가져야 한다.
+- 클라이언트 객체는 직접 구현 객체를 생성하고, 연결하고, 실행하는 다양한 책임을 가지고 있음
+- SRP 단일 책임 원칙에 따라 관심사를 분리
+- 구현 객체를 생성하고 연결하는 책임은 `AppConfig`가 담당
+- 클라이언트 객체는 실행하는 책임만 담당
+
+**DIP 의존관계 역전 원칙**<br />
+프로그래머는 "추상화에 의존해야지, 구체화에 의존하면 안된다."<br />
+의존성 주입은 이 원칙을 따르는 방법 중 하나
+- 새로운 할인 정책을 개발하고, 적용하려고 하니 클라이언트 코드도 함께 변경해야 했음
+    - 기존 클라이언트 코드는 DIP를 지키며 추상화 인터페이스에 의존하는 것 같았지만, 구체화 구현 클래스에도 함께 의존
+- 클라이언트 코드가 추상화 인터페이스에만 의존하도록 코드를 변경
+    - 그러나 클라이언트 코드는 인터페이스만으로는 아무것도 실행할 수 없음
+- `AppConfig`가 객체 인스턴스를 클라이언트 코드 대신 생성해서 클라이언트 코드에 의존관계를 주입
+    - DIP 원칙을 따르면서 문제도 해결했다.
+
+**OCP 개방-폐쇄 원칙**<br />
+소프트웨어 요소는 확장에는 열려 있으나 변경에는 닫혀 있어야 한다.
+- 다형성을 사용하고 클라이언트가 DIP를 지킴
+- 애플리케이션을 사용 영역과 구성 영역으로 나눔
+- AppConfig가 의존관계를 변경하여 클라이언트 코드에 주입하므로 클라이언트 코드를 변경하지 않아도 됨
+
 ### IoC, DI, 그리고 컨테이너
 
+**제어의 역전 IOC(Inversion of Control)**<br />
+- 기존 프로그램은 클라이언트 구현 객체가 스스로 필요한 서버 구현 객체를 생성하고 연결하고 실행함
+    - 구현 객체가 프로그램의 제어 흐름을 스스로 조종
+- `AppConfig`가 등장한 이후, 구현 객체는 자신의 로직을 실행하는 역할만 담당하고 프로그램의 제어 흐름은 `AppConfig`가 가져감
+    - 프로그램의 제어 흐름에 대한 권한은 모두 `AppConfig`가 보유
+    - 구현 객체의 생성과 실행도 제어
+- 프로그램의 제어 흐름을 직접 게어하는 것이 아니라 외부에서 관리하는 것을 제어의 역전(IoC)라고 부름
+
+프레임워크 vs. 라이브러리<br />
+- 프레임워크: 내가 작성한 코드를 제어하고 대신 실행
+- 라이브러리: 내가 작성한 코드가 직접 제어의 흐름을 담당
+
+**의존관계 주입 DI(Dependency Injection)**<br />
+- 의존관계는 정적인 클래스 의존관계와, 실행 시점에 결정되는 동적인 객체(인스턴스) 의존관계를 분리해서 생각해야 한다.
+
+정적인 클래스 의존관계
+- 클래스가 사용하는 import 코드만 보고 의존관계를 쉽계 판단할 수 있음
+- 정적인 의존관계는 애플리케이션을 실행하지 않아도 분석할 수 있음
+
+![SPRING#0016](/assets/images/0016-dependency-static.png)
+
+동적인 객체 인스턴스 의존관계
+- 애플리케이션 실행 시점에 실제 생성된 객체 인스턴스의 참조가 연결된 의존관계
+
+![SPRING#0017](/assets/images/0017-dependency-dynamic.png)
+- 의존관계 주입: 애플리케이션 실행 시점(런타임)에 외부에서 실제 구현 객체를 생성하고 클라이언트에 전달해서 클라이언트와 서버의 실제 의존관계가 연결되는 것
+    - 객체 인스턴스를 생성하고, 그 찹조값을 전달해서 연결
+- 의존관계 주입을 통해 클라이언트 코드를 변경하지 않고, 클라이언트가 호출하는 대상의 타입 인스턴스 변경 가능
+- 의존관계 주입을 사용하면 정적인 클래스 의존관계를 변경하지 않고, 동적인 객체 인스턴스 의존관계를 쉽게 변경할 수 있음
+
+**IoC 컨테이너, DI 컨테이너**
+- `AppConfig`처럼 객체를 생성하고 관리하면서 의존관계를 연결해주는 것
+- 의존관계 주입에 초점을 맞춰 최근에는 주로 DI 컨테이너라고 부름
+
 ### 스프링으로 전환하기
+
+순수한 자바 코드 -> 스프링
+
+```java
+@Configuration
+public class AppConfig {
+
+    @Bean
+    public MemberService memberService() {
+        return new MemberServiceImpl(memberRepository());
+    }
+
+    @Bean
+    public MemberRepository memberRepository() {
+        return new MemoryMemberRepository();
+    }
+
+    @Bean
+    public OrderService orderService() {
+        return new OrderServiceImpl(memberRepository(), discountPolicy());
+    }
+
+    @Bean
+    public DiscountPolicy discountPolicy() {
+//        return new FixDiscountPolicy();
+        return new RateDiscountPolicy();
+    }
+
+}
+```
+- `AppConfig`에 스프링 설정을 구성한다는 의미로 `@Configuration`을 붙임
+- 각 메서드에 `@Bean`을 붙여 스프링 컨테이너의 스프링 빈으로 등록
+
+```java
+public class MemberApp {
+
+    public static void main(String[] args) {
+//        AppConfig appConfig = new AppConfig();
+//        MemberService memberService = appConfig.memberService();
+
+        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(AppConfig.class);
+        MemberService memberService = applicationContext.getBean("memberService", MemberService.class);
+
+        Member member = new Member(1L, "memberA", Grade.VIP);
+        memberService.join(member);
+
+        Member findMember = memberService.findMember(1L);
+        System.out.println("new member = " + member.getName());
+        System.out.println("find member = " + findMember.getName());
+    }
+
+}
+```
+
+```java
+public class OrderApp {
+
+    public static void main(String[] args) {
+//        AppConfig appConfig = new AppConfig();
+//        MemberService memberService = appConfig.memberService();
+//        OrderService orderService = appConfig.orderService();
+
+        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(AppConfig.class);
+        MemberService memberService = applicationContext.getBean("memberService", MemberService.class);
+        OrderService orderService = applicationContext.getBean("orderService", OrderService.class);
+
+        Long memberId = 1L;
+        Member member = new Member(memberId, "memberA", Grade.VIP);
+        memberService.join(member);
+
+        Order order = orderService.createOrder(memberId, "itemA", 20000);
+
+        System.out.println("order = " + order);
+    }
+
+}
+```
+
+**스프링 컨테이너**
+- `ApplicationContext`를 스프링 컨테이너라고 함
+    - 기존에는 개발자가 `AppConfig`를 사용해서 직접 객체를 생성하고 DI를 함
+    - 지금부터는 스프링 컨테이너를 사용
+- 스프링 컨테이너는 `@Configuration`이 붙은 `AppConfig`를 설정 정보로 사용
+    - `@Bean`이라 적힌 메서드를 모두 호출해서 반환된 객체를 스프링 컨테이너에 등록
+    - 스프링 컨테이너에 등록된 객체를 스프링 빈이라고 함
+- 스프링 빈은 `@Bean`이 붙은 메서드의 이름을 스프링 빈의 이름으로 사용
+- 스프링 빈은 `applicationContext.getBean()` 매서드를 통해 찾을 수 있음
+- 기존에는 개발자가 직접 자바 코드로 모든 것을 했다면, 지금부터는 스프링 컨테이너에 객체를 스프링 빈으로 등록하고 스프링 컨테이너에서 스프링 빈을 찾아서 사용
+
+*코드가 좀 더 복잡해졌는데, 스프링 컨테이너를 사용하면 어떤 장점이 있는가?*
 
 ## 4. 스프링 컨테이너와 스프링 빈
 
@@ -647,7 +1058,7 @@ public class OrderServiceImpl implements OrderService{
 
 ### 스프링 빈 조회 - 기본
 
-### 스프링 빈 조회 - 동인한 타입이 둘 이상
+### 스프링 빈 조회 - 동일한 타입이 둘 이상
 
 ### 스프링 빈 조회 - 상속 관계
 
