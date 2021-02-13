@@ -4,12 +4,14 @@ title: About
 show_title: false
 ---
 
+<meta name="format-detection" content="telephone=no">
+
 # 김준영 (Kim Junyoung)
 
 <div style="text-align: right"><i>Last Updated: 2021.02.13.</i></div>
 
 여러가지 공부하는 것을 좋아하는, 그냥 **프로그래머** 입니다.<br />
-*Machine Learning, Computer Architecture, IoT, Cloud, Webn, etc.*
+*Machine Learning, Computer Architecture, IoT, Cloud, Web, etc.*
 
 **GitHub** <https://github.com/junyoung1992><br />
 **Contact** <orsay0827@gmail.com>
