@@ -1825,6 +1825,95 @@ bean = class hello.core.AppConfig$$EnhancerBySpringCGLIB$$dfa855fc
 
 ### 컴포넌트 스캔과 의존 관계 자동 주입 시작하기
 
+- 등록해야 할 스프링 빈이 수십, 수백 개가 되면 일일이 등록하기에 힘들어지며, 설정 정보도 커지게 되어 누락하는 문제가 발생할 수 있음
+- 그래서 스프링은 설정 정보가 없어도 자동으로 스프링 빈을 등록하는 컴포넌트 스캔이라는 기능을 제공
+- 또한 의존관계도 자동으로 주입하는 `@Autowired`라는 기능도 제공
+
+```java
+@Configuration
+@ComponentScan(
+        // 예제를 안전하기 유지하기 위해 Configuration을 제외
+        excludeFilters = @ComponentScan.Filter(type = FilterType.ANNOTATION, classes = Configuration.class)
+)
+public class AutoAppConfig {
+}
+```
+- 컴포넌트 스캔을 사용하려면 먼저 `@ComponentScan`을 설정 정보에 붙여줘야 함
+    - 컴포넌트 스캔을 사용하면 `@Configuration`이 붙은 설정 정보도 자동으로 등록되기 때문에, `AppConfig`, `TestConfig` 등 앞서 만들어두었던 설정 정보도 함께 등록, 실행됨
+    - `excludeFilters 를 이용해서 설정정보는 컴포넌트 스캔 대상에서 제외함
+- 기존의 AppConfig와 달리 `@Bean`으로 등록한 클래스가 없음
+
+컴포넌트 스캔의 대상이 되도록 `@Component` 애노테이션 추가
+
+```java
+@Component
+public class MemoryMemberRepository implements MemberRepository{}
+```
+
+```java
+@Component
+public class RateDiscountPolicy implements DiscountPolicy{}
+```
+
+```java
+@Component
+public class MemberServiceImpl implements MemberService{
+
+    private final MemberRepository memberRepository;
+
+    @Autowired  // ac.getBean(MemberRepository.class);
+    public MemberServiceImpl(MemberRepository memberRepository) {
+        this.memberRepository = memberRepository;
+    }
+
+    ......
+
+}
+```
+
+```java
+@Component
+public class OrderServiceImpl implements OrderService{
+
+    private final MemberRepository memberRepository;
+    private final DiscountPolicy discountPolicy;
+
+    @Autowired
+    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+        this.memberRepository = memberRepository;
+        this.discountPolicy = discountPolicy;
+    }
+
+    ......
+}
+```
+- 의존관계 주입도 이 클래스 안에서 해결
+
+```java
+public class AutoAppConfigTest {
+
+    @Test
+    void basicScan() {
+        AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(AutoAppConfig.class);
+
+        MemberService memberService = ac.getBean(MemberService.class);
+        assertThat(memberService).isInstanceOf(MemberService.class);
+    }
+}
+```
+
+**컴포넌트 스캔과 자동 의존관계 주입의 동작 과정**
+
+![SPRING#0031](/assets/images/spring-core/0031-component-scan.png)
+- `@ComponentScan`은 `@Component`가 붙은 모든 클래스를 스프링빈으로 등록
+- 스프링 빈의 기본 이름은 클래스명을 사용하되 맨 앞 글자만 소문자를 사용
+    - 빈 이름 기본 전략: MemberServiceImpl 클래스 memberServiceImpl
+    - 빈 이름 직접 지정: 만약 스프링 빈의 이름을 직접 지정하고 싶으면 `@Component("memberService2")` 이런식으로 이름을 부여하면 된다
+
+![SPRING#0032](/assets/images/spring-core/0032-autowired-1.png)<br />
+![SPRING#0032](/assets/images/spring-core/0033-autowired-2.png)
+- 생성자에 @Autowired 를 지정하면, 스프링 컨테이너가 자동으로 해당 스프링 빈을 찾아서 주입
+
 ### 탐색 위치와 기본 스캔 대상
 
 ### 필터
