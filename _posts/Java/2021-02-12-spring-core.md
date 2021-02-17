@@ -59,7 +59,7 @@ tags: Java Spring Inflearn
 - 객체 지향 프로그래밍은 프로그램을 유연하고 변경이 용이하게 만들기 떄문에 대규모 소프트웨어 개발에서 많이 사용
 
 유연하고 변경이 용이하다?
-- 레고 블럭을 조립하듯, 컴포넌트를 쉽고 유연하게 변경하면서 개발할 수 있는 방법 -> 다형성(Polymorphism)
+- 레고 블럭을 조립하듯, 컴포넌트를 쉽고 유연하게 변경하면서 개발할 수 있는 방법 → 다형성(Polymorphism)
 - 다형성: 역할과 구현으로 프로그래밍을 구분
 
 역할과 구현을 분리
@@ -78,7 +78,7 @@ tags: Java Spring Inflearn
 
 객체의 협력이라는 관계부터 생각
 - 혼자 있는 객체는 없음
-- 클라이언트: 요청 -> 서버: 응답
+- 클라이언트: 요청 → 서버: 응답
 - 수많은 객체 클라이언트와 객체 서버는 서로 협력 관계를 가짐
 
 자바 언어의 다형성
@@ -140,7 +140,7 @@ Open/Clodes Principle
     - 구현 객체를 변경하려면 클라이언트 코드를 변경해야 함
     - 분명 다형성을 사용했지만 OCP 원칙을 지킬 수 없음
 - **해결책**
-    - 객체를 생성하고 연관 관계를 맺어주는 별도의 조립, 설정자가 필요 -> Spring 배우면서!!
+    - 객체를 생성하고 연관 관계를 맺어주는 별도의 조립, 설정자가 필요 → Spring 배우면서!!
 
 LSP 리스코프 치환 원칙<br />
 Liskov Substitution Principle
@@ -345,7 +345,7 @@ Dependency Inversion Principle
         }
     }
     ```
-    - 애플리케이션 로직으로 테스트를 하는 것은 좋은 방법이 아님 -> JUnit 테스트 활용
+    - 애플리케이션 로직으로 테스트를 하는 것은 좋은 방법이 아님 → JUnit 테스트 활용
 - 회원 가입 테스트
     ```java
     public class MemberServiceTest {
@@ -677,7 +677,7 @@ public class MemberServiceImpl implements MemberService{
 - 객체의 생성과 연결은 `AppConfig`가 담당
 - DIP의 완성: `MemberServiceImpl`은 `MemberRepository`에만 의존하면 됨
     - 구체 클래스에 대해서는 몰라도 됨
-- 관심사의 분리 -> 객체를 생성하고 연결하는 역할과 실행하는 역할이 명확히 분리됨
+- 관심사의 분리 → 객체를 생성하고 연결하는 역할과 실행하는 역할이 명확히 분리됨
 
 회원 객체 인스턴스 다이어그램<br />
 ![#SPRING#0012](/assets/images/spring-core/0012-member-object-instance.png)
@@ -839,7 +839,7 @@ public class AppConfig {
 ### 새로운 구조와 할인 정책 적용
 
 정액 할인 정책을 정률 할인 정책으로 변경
-- `FixDiscountPolicy` -> `RateDiscountPolicy`
+- `FixDiscountPolicy` → `RateDiscountPolicy`
 
 사용, 구성의 분리<br />
 ![SPRING#0014](/assets/images/spring-core/0014-revise-discount-policy-1.png)
@@ -881,13 +881,13 @@ public class AppConfig {
 **새로운 할인 정책의 적용과 문제점**<br />
 새로 개발한 정률 할인 정책을 적용하려면 클라이언트 코드인 주문 서비스 구현체도 함께 수정해야 함<br />
 주문 서비스 클라이언트가 인터페이스인 `DiscountPolicy` 뿐만 아니라, 구체 클래스인 `FixDiscountPolicy`도 함께 의존<br />
--> DIP 위반
+→ DIP 위반
 
 **관심사의 분리**<br />
 - 기존에는 클라이언트가 의존하는 서버 구현 객체를 직접 생성하고 실행
 - `AppConfig`의 등장
 - `AppConfig`는 애플리케이션의 전체 동작 방식을 구성하기 위해, 구현 객체를 생성하고 연결하는 역할을 함
-- 이제 클라이언트 객체는 자신의 역할을 실행하는 것에만 집중 -> 책임이 명확해짐
+- 이제 클라이언트 객체는 자신의 역할을 실행하는 것에만 집중 → 책임이 명확해짐
 
 **AppConfig** 리팩터링<br />
 - 구성 정보에서 역할과 구현을 명확하게 분리
@@ -960,7 +960,7 @@ public class AppConfig {
 
 ### 스프링으로 전환하기
 
-순수한 자바 코드 -> 스프링
+순수한 자바 코드 → 스프링
 
 ```java
 @Configuration
@@ -1383,11 +1383,11 @@ class XmlAppContext {
 
 ### 스프링 빈 설정 메타 정보 - BeanDefinition
 
-- 스프링이 다양한 설정 형식을 지원하는 방법 -> `BeanDefinition`
+- 스프링이 다양한 설정 형식을 지원하는 방법 → `BeanDefinition`
 - 역할과 구현을 개념적으로 나눈 것
     - XML을 읽어서 BeanDefinition을 만듦
     - Java 코드를 읽어서 BeanDefinition을 만듦
-    - 스프링 컨테이너는 Java인지 XML인지 몰라도 됨 -> 오직 BeanDefinition만 알면 됨
+    - 스프링 컨테이너는 Java인지 XML인지 몰라도 됨 → 오직 BeanDefinition만 알면 됨
 - `BeanDefinition`을 빈 설정 메타정보라고 함
     - `@Bean`, `<bean>` 당 하나의 메타 정보가 생성
 - 스프링 컨테이너는 이 메타 정보를 기반으로 스프링 빈을 생성
@@ -1466,8 +1466,8 @@ public class pureContainer {
 }
 ```
 - 스프링 없는 순수한 DI 컨테이너인 `AppConfig`는 요청을 할 때마다 객체를 새로 생성
-- 고객 트래픽이 초당 100이 나오면 초당 100개의 객체가 생성되고 소멸됨 -> 메모리 낭비
-- 해결 방안: 해당 객체가 단 한 개만 생성되고 공유하도록 설계하면 됨 -> 싱글톤 패턴 
+- 고객 트래픽이 초당 100이 나오면 초당 100개의 객체가 생성되고 소멸됨 → 메모리 낭비
+- 해결 방안: 해당 객체가 단 한 개만 생성되고 공유하도록 설계하면 됨 → 싱글톤 패턴 
 
 ### 싱글톤 패턴
 
@@ -1782,7 +1782,7 @@ call AppConfig.orderService
 
 ### @Configuration과 바이트 코드 조작의 마법
 
-스프링 컨테이너는 싱글톤 레지스트리 -> 스프링 빈이 싱글톤이 되도록 보장<br />
+스프링 컨테이너는 싱글톤 레지스트리 → 스프링 빈이 싱글톤이 되도록 보장<br />
 스프링은 클래스의 바이트 코드를 조작하는 라이브러리를 사용
 - `@Configuration`을 적용한 `AppConfig`에 비밀이 있음
 
@@ -1916,9 +1916,180 @@ public class AutoAppConfigTest {
 
 ### 탐색 위치와 기본 스캔 대상
 
+모든 자바 클래스를 다 컴포넌트 스캔하면 시간이 오래 걸림 → 꼭 필요한 위치부터 탐색하도록 시작 위치를 지정할 수 있음
+
+```java
+@Configuration
+@ComponentScan(
+        basePackages = "hello.core"
+        // 예제를 안전하기 유지하기 위해 Configuration을 제외
+        excludeFilters = @ComponentScan.Filter(type = FilterType.ANNOTATION, classes = Configuration.class)
+)
+public class AutoAppConfig {
+}
+```
+- `basePackages`: 탐색할 패키지의 시작 위치를 지정
+    - 이 패키지를 포함한 하위 패키지를 모두 탐색
+    - `basePackages = {"hello.core", "hello.service"}` 이렇게 여러 시작 위치를 지정할 수도 있음
+- `basePackageClasses`: 지정한 클래스의 패키지를 탐색 시작 위치로 지정
+- 지정하지 않으면 `@ComponentScan`이 붙은 설정 정보 클래스의 패키지가 시작 위치가 됨
+
+**권장하는 방법**<br />
+강사가 개인적으로 즐겨 사용하는 방법은 패키지 위치를 지정하지 않고, 설정 정보 클래스의 위치를 프로젝트 최상단에 둠<br />
+최근 스프링 부트도 이 방법을 기본으로 제공함
+
+- `com.hello`
+- `com.hello.serivce`
+- `com.hello.repository`
+
+`com.hello` → 프로젝트 시작 루트, 여기에 AppConfig 같은 메인 설정 정보를 두고, `@ComponentScan` 애노테이션을 붙이고, `basePackages` 지정은 생략<br />
+이렇게 하면 `com.hello`를 포함한 하위는 모두 자동으로 컴포넌트 스캔의 대상이 됨<br />
+그리고 프로젝트 메인 설정 정보는 프로젝트를 대표하는 정보이기 때문에 프로젝트 시작 루트 위치에 두는 것이 좋음<br />
+참고로 스프링 부트를 사용하면 스프링 부트의 대표 시작 정보인 @SpringBootApplication 를 이 프로젝트 시작 루트 위치에 두는 것이 관례<br />
+그리고 이 설정안에 바로 @ComponentScan 이 들어있음
+
+**컴포넌트 스캔 기본 대상**<br />
+컴포넌트 스캔은 `@Component` 뿐만 아니라 다음과 내용도 추가로 대상에 포함
+
+- `@Component`: 컴포넌트 스캔에서 사용
+- `@Controlller`: 스프링 MVC 컨트롤러에서 사용
+- `@Service`: 스프링 비즈니스 로직에서 사용
+- `@Repository`: 스프링 데이터 접근 계층에서 사용
+- `@Configuration`: 스프링 설정 정보에서 사용
+
+> **참고**<br />
+사실 애노테이션에는 상속관계라는 것이 없음<br />
+이렇게 애노테이션이 특정 애노테이션을 들고 있는 것을 인식하는 것은 자바가 아닌, 스프링이 지원하는 기능임
+
+다음 애노테이션이 있으면 스프링은 부가 기능을 수행함
+- `@Controller`: 스프링 MVC 컨트롤러로 인식
+- `@Repository`: 스프링 데이터 접근 계층으로 인식하고, 데이터 계층의 예외를 스프링 예외로 변환함
+- `@Configuration`: 앞서 보았듯이 스프링 설정 정보로 인식하고, 스프링 빈이 싱글톤을 유지하도록 추가 처리
+- `@Service`: 사실 `@Service` 는 특별한 처리를 하지 않음
+    - 대신 개발자들이 "핵심 비즈니스 로직이 여기에 있겠구나" 라고 비즈니스 계층을 인식하는데 도움이 됨
+
+> **참고**<br />
+`useDefaultFilters` 옵션은 기본으로 켜져있는데, 이 옵션을 끄면 기본 스캔 대상들이 제외됨<br />
+그냥 이런 옵션이 있구나 정도 알고 넘어가도 됨
+
 ### 필터
 
+- `includeFilters`: 컴포넌트 스캔 대상을 추가로 지정
+- `excludeFilters`: 컴포넌트 스캔에서 제외할 대상을 지정
+
+```java
+@Target(ElementType.TYPE)
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+public @interface MyIncludeComponent {
+}
+```
+
+```java
+@Target(ElementType.TYPE)
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+public @interface MyExcludeComponent {
+}
+```
+
+```java
+@MyIncludeComponent
+public class BeanA {
+}
+```
+
+```java
+@MyExcludeComponent 
+public class BeanB {
+}
+```
+
+```java
+public class ComponentFilterAppConfigTest {
+    @Test
+    void filterScan() {
+        AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(ComponentFilterAppConfig.class);
+        BeanA beanA = ac.getBean("beanA", BeanA.class);
+        assertThat(beanA).isNotNull();
+
+        assertThrows(
+                NoSuchBeanDefinitionException.class,
+                () -> ac.getBean("beanB", BeanB.class)
+        );
+    }
+
+    @Configuration
+    @ComponentScan(
+            includeFilters = @Filter(type = FilterType.ANNOTATION, classes = MyIncludeComponent.class),
+            excludeFilters = @Filter(type = FilterType.ANNOTATION, classes = MyExcludeComponent.class)
+    )
+    static class ComponentFilterAppConfig {
+    }
+}
+```
+- `includeFilters`에 `MyIncludeComponent` 애노테이션을 추가해서 `BeanA`가 스프링 빈에 등록됨
+- `excludeFilters`에 `MyExcludeComponent` 애노테이션을 추가해서 `BeanB`는 스프링 빈에 등록되지 않음
+
+**FilterType 옵션**<br />
+- `ANNOTATION`: 기본값, 애노테이션을 인식해서 동작한다.
+    - ex) `org.example.SomeAnnotation`
+- `ASSIGNABLE_TYPE`: 지정한 타입과 자식 타입을 인식해서 동작한다.
+    - ex) `org.example.SomeClass`
+- `ASPECTJ`: AspectJ 패턴 사용
+    - ex) `org.example..*Service+`
+- `REGEX`: 정규 표현식
+    - ex) `org\.example\.Default.*`
+- `CUSTOM`: TypeFilter이라는 인터페이스를 구현해서 처리
+    - ex) `org.example.MyTypeFilter`
+
+상기 코드에서 BeanA도 빼고 싶으면 다음과 같이 작성
+
+```java
+@ComponentScan(
+    includeFilters = {
+        @Filter(type = FilterType.ANNOTATION, classes = MyIncludeComponent.class),
+    },
+    excludeFilters = {
+        @Filter(type = FilterType.ANNOTATION, classes = MyExcludeComponent.class
+    ),
+ @Filter(
+        type = FilterType.ASSIGNABLE_TYPE, classes = BeanA.class)
+    }
+)
+```
+
+> **참고**<br />
+`@Component`면 충분하기 때문에, `includeFilters`를 사용할 일은 거의 없음<br />
+`excludeFilters`는 여러가지 이유로 간혹 사용할 때가 있지만 많지는 않음<br />
+최신 스프링 부트는 컴포넌트 스캔을 기본으로 제공하는데, 개인적으로는 옵션을 변경하면서 사용하기보다는 스프링의 기본 설정에 최대한 맞추어 사용하는 것을 권장
+
 ### 중복 등록과 충돌
+
+**자동 빈 등록 vs 자동 빈 등록**
+- 컴포넌트 스캔에 의해 자동으로 스프링 빈이 등록되는데, 그 이름이 같은 경우 스프링은 오류를 발생
+    - `ConflictingBeanDefinitionException` 예외 발생
+
+**수동 빈 등록 vs 자동 빈 등록**
+- 이 경우 수동 빈 등록이 우선권을 가짐
+    - 수동 빈이 자동 빈을 오버라이딩 함
+
+수동 빈 등록시 남는 로그
+
+```bash
+Overriding bean definition for bean 'memoryMemberRepository' with a different
+definition: replacing
+```
+
+최근 스프링 부트에서는 수동 빈 등록과 자동 빈 등록이 충돌하면 오류를 발생하도록 수정
+- 대부분의 경우 설정이 꼬여서 발생하기 때문
+
+수동 빈 등록, 자동 빈 등록 오류시 스프링 부트 에러
+
+```bash
+Consider renaming one of the beans or enabling overriding by setting
+spring.main.allow-bean-definition-overriding=true
+```
 
 ## 7. 의존관계 자동 주입
 
