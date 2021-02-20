@@ -2051,10 +2051,8 @@ public class ComponentFilterAppConfigTest {
         @Filter(type = FilterType.ANNOTATION, classes = MyIncludeComponent.class),
     },
     excludeFilters = {
-        @Filter(type = FilterType.ANNOTATION, classes = MyExcludeComponent.class
-    ),
- @Filter(
-        type = FilterType.ASSIGNABLE_TYPE, classes = BeanA.class)
+        @Filter(type = FilterType.ANNOTATION, classes = MyExcludeComponent.class),
+        @Filter(type = FilterType.ASSIGNABLE_TYPE, classes = BeanA.class)
     }
 )
 ```
@@ -2095,15 +2093,337 @@ spring.main.allow-bean-definition-overriding=true
 
 ### 다양한 의존관계 주입 방법
 
+**의존관계 주입 방법**<br />
+- 생성자 주입
+- 수정자 주입(setter 주입)
+- 필드 주입
+- 일반 메서드 주입
+
+**생성자 주입**<br />
+- 생성자를 통해서 의존관계를 주입
+    - 생성자 호출 시점에 딱 한 번만 호출되는 것이 보장
+    - **불변**, **필수** 의존관계에 사용
+
+```java
+@Component
+public class OrderServiceImpl implements OrderService{
+
+    private final MemberRepository memberRepository;
+    private final DiscountPolicy discountPolicy;
+
+    @Autowired
+    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+        this.memberRepository = memberRepository;
+        this.discountPolicy = discountPolicy;
+    }
+
+}
+```
+- 생성자가 딱 한 개만 있으면 `@Autowired`를 생략해도 자동 주입 (**스프링 빈**만)
+
+**수정자 주입(setter 주입)**<br />
+- setter라 불리는 필드의 값을 변경하는 수정자 메서드를 통해서 의존관계를 주입하는 방법
+    - **선택**, **변경** 가능성이 있는 의존관계에 사용
+    - 자바 빈 프로퍼티 규약의 수정자 메서드 방식을 사용하는 방법
+
+```java
+@Component
+public class OrderServiceImpl implements OrderService {
+
+    private MemberRepository memberRepository;
+    private DiscountPolicy discountPolicy;
+
+    @Autowired
+    public void setMemberRepository(MemberRepository memberRepository) {
+        this.memberRepository = memberRepository;
+    }
+
+    @Autowired
+    public void setDiscountPolicy(DiscountPolicy discountPolicy) {
+        this.discountPolicy = discountPolicy;
+    }
+}
+```
+- `@Autowired`의 기본 동작은 주입할 대상이 없으면 오류 발생
+    - 주입할 대상이 없어도 동작하게 하려면 `@Autowired(required = false)`로 지정
+- 자바 빈 프로퍼티 규약: 필드의 값을 직접 변경하지 않고 setter, getter 메서드를 통해서 값을 읽거나 수정하는 규칙
+
+**필드 주입**<br />
+- 코드가 간결하지만 외부에서 변경이 불가능해 테스트하기 힘듬
+- DI 프레임워크가 없으면 아무것도 할 수 없음
+- 테스트 코드, 스프링 설정을 목적으로 하는 @Configuration 같은 곳에서만 특별한 용도로 사용
+    - 일반적인 경우에는 사용하지 말것
+
+```java
+@Component
+public class OrderServiceImpl implements OrderService {
+    @Autowired
+    private MemberRepository memberRepository;
+
+    @Autowired
+    private DiscountPolicy discountPolicy;
+}
+```
+- 순수한 자바 테스트 코드에서는 `@Autowired`가 동작하지 않음
+    - `@SpringBootTest`처럼 스프링 컨테이너를 테스트에 통합한 경우에만 가능
+- `@Bean`에서 파라미터의 의존관계는 자동으로 주입됨
+
+```java
+@Bean
+OrderService orderService(MemberRepository memberRepoisitory, DiscountPolicy discountPolicy) {
+    new OrderServiceImpl(memberRepository, discountPolicy)
+}
+```
+
+**일반 메서드 주입**<br />
+- 한 번에 여러 필드를 주입받을 수 있음
+- 일반적으로 잘 사용하지 않음
+
+```java
+@Component
+public class OrderServiceImpl implements OrderService {
+
+    private MemberRepository memberRepository;
+    private DiscountPolicy discountPolicy;
+
+    @Autowired
+    public void init(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+        this.memberRepository = memberRepository;
+        this.discountPolicy = discountPolicy;
+    }
+
+}
+```
+- 의존관계 자동 주입은 스프링 컨테이너가 관리하는 스프링 빈이어야 동작
+    - 스프링 빈이 아닌 `Member`같은 클래스에서는 `@Autowired` 코드를 적용해도 아무 기능도 동작하지 않음
+
 ### 옵션 처리
+
+- 주입할 스프링 빈이 없어도 동작해야 할 때도 있음
+- `@Autowired`만 사용하면 required 옵션의 기본값이 true로 설정되어 있어, 자동 주입 대상이 없으면 오류가 발생
+- 자동 주입 대상을 옵션으로 처리하는 방법
+    - `@Autowired(required=false)`: 자동 주입할 대상이 없으면 수정자 메서드 자체가 호출되지 않음
+    - `@Nullable`: 자동 주입할 대상이 없으면 `null`이 입력됨
+    - `Optional<>`: 자동 주입할 대상이 없으면 `Optional.empty`가 입력됨
+
+```java
+public class AutowiredTest {
+
+    @Test
+    void AutowiredOption() {
+        AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(TestBean.class);
+    }
+
+    static class TestBean {
+
+        @Autowired(required = false)
+        public void setNoBean1(Member noBean1) {
+            System.out.println("noBean1 = " + noBean1);
+        }
+
+        @Autowired
+        public void setNoBean2(@Nullable Member noBean2) {
+            System.out.println("noBean2 = " + noBean2);
+        }
+
+        @Autowired
+        public void setNoBean3(Optional<Member> noBean3) {
+            System.out.println("noBean3 = " + noBean3);
+        }
+
+    }
+
+}
+```
+- `Member`는 스프링 빈이 아님
+
+출력 결과<br />
+```bash
+noBean2 = null
+noBean3 = Optional.empty
+```
+- `setNoBean1()`은 `@Autowired(required=false)`이므로 호출되지 않음
+- `@Nullable`, `Optional<>`은 스프링 전반에 걸쳐 지원됨
+    - 생성자 자동 주입에서 특정 필드에만 사용해도 됨
 
 ### 생성자 주입을 선택해라!
 
+과거에는 수정자 주입과 필드 주입을 많이 사용했지만, 최근에는 스프링을 포함한 DI 프레임워크 대부분이 생성자 주입을 권장함
+
+**불변**<br />
+- 대부분의 의존관계 주입은 한 번 일어나면 애플리케이션 종료 시점까지 의존관계를 변경할 일이 없음
+    - 오히려 대부분의 의존관계는 애플리케이션 종료 전까지 변하면 안됨
+- 수정자 주입을 사용하면 setter 메서드를 public으로 열어두어야 함
+- 누군가의 실수로 변경될 수 있는 설계는 좋은 설계가 아님
+- 생성자 주입은 객체를 생성할 때 단 한 번만 호출되므로 불변하게 설계할 수 있음
+
+**누락**<br />
+- 생성자 주입을 사용하면 주입 데이터를 누락했을 때 컴파일 오류가 발생
+    - 수정자 의존관계의 경우 테스트가 실행된 후 exception 오류가 발생할 수 있음
+    - 생성자 주입을 사용하면 IDE에서 바로 어떤 값을 주입해야 하는지 알 수 있음
+
+**final 키워드**<br />
+- 생성자 주입을 사용하면 `final` 키워드를 사용할 수 있음
+- 생성자에서 혹시라도 값이 설정되지 않는 오류를 컴파일 시점에서 막아줌
+    - 수정자 주입을 포함한 나머지 주입 방식은 모두 생성자 이후에 호출되므로 필드에 final 키워드를 사용할 수 없음
+    - `final` 키워드는 사전에 변수에 값을 기입하거나 생성자를 사용하는 경우에만 사용할 수 있음
+
+> 항상 생성자 주입을 선택해라<br />
+가끔 옵션이 필요하면 수정자 주입을 선택해라
+
 ### 롬복과 최신 트랜드
+
+막상 개발을 하면 대부분의 변수가 변하지 않기 때문에 생성자 주입에 final 키워드를 사용한다.<br />
+패턴화된 필드 주입을 간소화 -> 롬복 Lombok
+
+**Lombok 라이브러리 적용**<br />
+
+```gradle
+//lombok 설정 추가
+......
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+dependencies {
+    ......
+
+    //lombok 라이브러리 추가
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    testCompileOnly 'org.projectlombok:lombok'
+    testAnnotationProcessor 'org.projectlombok:lombok'
+
+    ......
+}
+
+......
+```
+- Preference -> Plugin -> lombok 설치 및 실행
+- Preference -> Annotation Processors -> Enable annotation processing 체크
+
+**기본 코드**<br />
+```java
+@Component
+public class OrderServiceImpl implements OrderService {
+
+    private final MemberRepository memberRepository;
+    private final DiscountPolicy discountPolicy;
+
+    @Autowired
+    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+        this.memberRepository = memberRepository;
+        this.discountPolicy = discountPolicy;
+    }
+
+}
+```
+
+**롬복을 적용한 코드**<br />
+```java
+@Component
+@RequiredArgsConstructor
+public class OrderServiceImpl implements OrderService {
+    private final MemberRepository memberRepository;
+    private final DiscountPolicy discountPolicy;
+}
+```
+- `@RequioredArgsConstructor` 기능을 사용하면 `final`이 붙은 필드를 모아서 생성자를 자동으로 만들어 줌
 
 ### 조회 빈이 2개 이상 - 문제
 
+- `@Autowired`는 타입(type)으로 조회함
+- 따라서 선택된 빈이 2개 이상일 때 문제가 발생함
+    - 의존관계 자동 주입을 실행하면 `NoUniqueBeanDefinitionException` 에러 발생
+    - 이 때 하위 타입으로 지정할 수도 있지만 하위 타입으로 지정하는 것은 DIP를 위반하고 유연성이 떨어짐
+
 ### @Autowired 필드 명, @Qualifier, @Primary
+
+조회 대상 빈이 2개 이상일 때 해결방법<br />
+- `@Autowired` 필드명 매칭
+- `@Qualifier` -> `@Qualifier` 끼리 매칭 -> 빈 이름 매칭
+- `@Primary` 사용
+
+**@Autowired 필드명 매칭**<br />
+`@Autowired`는 타입 매칭을 시도한 다음, 빈이 여러 개 있으면 필드 이름, 파라미터 이름으로 빈 이름을 매칭을 시도
+
+```java
+@Autowired
+private DiscountPolicy discountPolicy
+```
+
+```java
+@Autowired
+private DiscountPolicy rateDiscountPolicy
+```
+- 필드명을 빈 이름으로 변경
+- 필드명 매칭은 먼저 타입 매칭을 시도하고, 그 결과에 빈이 여러 개 있을 때 추가로 동작하는 기능
+
+**@Qualifier 사용**<br />
+빈 등록시 `@Qualifier` 추가 구분자를 붙임
+
+```java
+@Component
+@Qualifier("mainDiscountPolicy")
+public class RateDiscountPolicy implements DiscountPolicy {}
+```
+
+```java
+@Component
+@Qualifier("fixDiscountPolicy")
+public class FixDiscountPolicy implements DiscountPolicy {}
+```
+
+의존관계 주입시 `@Qualifier`를 붙여주고 등록한 이름을 적어줌
+
+```java
+@Autowired
+public OrderServiceImpl(MemberRepository memberRepository, @Qualifier("mainDiscountPolicy") DiscountPolicy discountPolicy) {
+    this.memberRepository = memberRepository;
+    this.discountPolicy = discountPolicy;
+}
+```
+
+```java
+@Autowired
+public DiscountPolicy setDiscountPolicy(@Qualifier("mainDiscountPolicy") DiscountPolicy discountPolicy) {
+    return discountPolicy;
+}
+```
+- `@Qualifier`로 주입할 때 해당 이름을 갖는 Qualifier를 찾지 못한다면, 해당 이름을 갖는 스프링 빈을 추가로 탐색
+    - `@Qualifier`는 `@Qualifier`를 찾는 용도로만 사용하는 것이 좋음
+
+**@Primary 사용**<br />
+`@Primary`는 우선순위를 정하는 방법<br />
+
+```java
+@Component
+@Primary
+public class RateDiscountPolicy implements DiscountPolicy {}
+
+@Component
+public class FixDiscountPolicy implements DiscountPolicy {}
+```
+
+```java
+@Autowired
+public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+    this.memberRepository = memberRepository;
+    this.discountPolicy = discountPolicy;
+}
+
+@Autowired
+public DiscountPolicy setDiscountPolicy(DiscountPolicy discountPolicy) {
+    return discountPolicy;
+}
+```
+
+**@Primary, @Qualifier 활용**<br />
+- 메인 데이터베이스의 커넥션을 획득하는 스프링 빈은 `@Primary`를 적용해서 조회하는 곳에서 `@Qualifier` 지정 없이 편리하게 조회 가능
+- 서브 데이터베이스 커넥션 빈을 획득할 때는 `@Qualifier`를 지정해서 명시적으로 획득 하는 방식으로 사용하면 코드를 깔끔하게 유지할 수 있음
 
 ### 애노테이션 직접 만들기
 
