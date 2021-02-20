@@ -2425,6 +2425,10 @@ public DiscountPolicy setDiscountPolicy(DiscountPolicy discountPolicy) {
 - 메인 데이터베이스의 커넥션을 획득하는 스프링 빈은 `@Primary`를 적용해서 조회하는 곳에서 `@Qualifier` 지정 없이 편리하게 조회 가능
 - 서브 데이터베이스 커넥션 빈을 획득할 때는 `@Qualifier`를 지정해서 명시적으로 획득 하는 방식으로 사용하면 코드를 깔끔하게 유지할 수 있음
 
+우선순위<br />
+- `@Qualifier`가 `@Primary`보다 우선순위가 높음
+    - 스프링은 자동보다는 수동, 넓은 범위의 선택권보다는 좁은 범위의 선택권이 우선 순위가 높음
+
 ### 애노테이션 직접 만들기
 
 ### 조회한 빈이 모두 필요할 때, List, Map
