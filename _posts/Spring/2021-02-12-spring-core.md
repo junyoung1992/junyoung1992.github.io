@@ -1,6 +1,6 @@
 ---
 title: "스프링 핵심 원리 - 기본편"
-tags: Java Spring Inflearn
+tags: Java Spring Backend Inflearn
 ---
 
 <https://www.inflearn.com/course/스프링-핵심-원리-기본편>
