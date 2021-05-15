@@ -8,9 +8,10 @@ show_title: false
 
 # 김준영 (Kim Junyoung)
 
-<div style="text-align: right"><i>Last Updated: 2021.02.17.</i></div>
+<div style="text-align: right"><i>Last Updated: 2021.05.15.</i></div>
 
-여러가지 공부하는 것을 좋아하는, 그냥 **프로그래머** 입니다.<br />
+세종대학교에서 컴퓨터공학을 전공하며, 데이터 중심 가속기 기반 컴퓨팅 시스템 및 다중 엣지 장치 기반 딥러닝 분산처리 기법에 대해 연구하였습니다.<br />
+현재는 CJ 올리브네트웍스에서 시스템 개발을 하고 있습니다.<br />
 *Machine Learning, Computer Architecture, IoT, Cloud, Web, etc.*
 
 **GitHub** <https://github.com/junyoung1992><br />
@@ -77,5 +78,6 @@ show_title: false
 ## Patents
 
 **Title** 분산된 분류 모델을 이용하는 분류 방법<br />
-**Patent Number** 대한민국 출원특허 10-2020-0076297. 2020.06.23.<br />
+**Patent Number** 대한민국 등록특허 10-2252788. 2021.05.11.<br />
+**PCT** WO 2020/262932 A1<br />
 **Inventer** 박기호. 김준영. 전종호. 기민관.
