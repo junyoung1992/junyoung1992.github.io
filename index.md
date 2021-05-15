@@ -10,7 +10,7 @@ show_title: false
 
 <div style="text-align: right"><i>Last Updated: 2021.05.15.</i></div>
 
-세종대학교에서 컴퓨터공학을 전공하며, 데이터 중심 가속기 기반 컴퓨팅 시스템 및 다중 엣지 장치 기반 딥러닝 분산처리 기법에 대해 연구하였습니다.<br />
+세종대학교에서 다중 엣지 장치 기반 딥러닝 분산처리 기법에 대해 연구하였습니다.<br />
 현재는 CJ 올리브네트웍스에서 시스템 개발을 하고 있습니다.<br />
 *Machine Learning, Computer Architecture, IoT, Cloud, Web, etc.*
 
